@@ -1,0 +1,34 @@
+@import 'bootstrap/less/bootstrap.less';
+@import 'font-awesome/less/font-awesome.less';
+
+@icon-font-path: '/bower_components/bootstrap/fonts/';
+@fa-font-path: '/bower_components/font-awesome/fonts';
+
+/* inject:less */
+@import "./client/app/main/main.less";
+@import "./client/components/navbar/navbar.less";
+/* endinject */
+
+/*
+Testing custom font
+*/
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url("../assets/fonts/CaviarDreams.ttf");
+}
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url("../assets/fonts/CaviarDreams_Bold.ttf");
+    font-weight: bold;
+}
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url("../assets/fonts/CaviarDreams_Italic.ttf");
+    font-style: italic;
+}
+@font-face {
+    font-family: "Caviar Dreams";
+    src: url("../assets/fonts/CaviarDreams/BoldItalic.ttf");
+    font-weight: bold;
+    font-style: italic;
+}
