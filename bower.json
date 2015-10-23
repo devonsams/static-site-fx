@@ -1,20 +1,20 @@
 {
-  "name": "signature-website",
+  "name": "my-signature-design",
   "version": "0.0.0",
   "authors": [
-    "Devon Sams <samsde@earlham.edu>"
+    "Devon Sams <samsde@earlham.edu>",
+    "Siddharth Sudheer <ssudhe13@earlham.edu"
   ],
   "license": "MIT",
-  "ignore": [
-    "**/.*",
-    "node_modules",
-    "bower_components",
-    "test",
-    "tests"
+  "main": [
+    "dist/navigation.min.css",
+    "dist/navigation.min.js"
   ],
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "font-awesome": "~4.4.0",
-    "jquery": "~2.1.4"
+    "jquery": "~2.1.4",
+    "bootstrap": "~3.1.1",
+    "enquire": "~2.1.2",
+    "font-awesome": ">=4.1.0",
+    "gsap": "greensock/GreenSock-JS"
   }
 }

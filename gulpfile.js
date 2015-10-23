@@ -14,148 +14,144 @@ var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
 var md5 = require("gulp-md5-assets");
 var imagemin = require('gulp-imagemin');
-var clean = require('gulp-clean');
+var del = require('del');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 var watch = require('gulp-watch');
 
 gulp.task('build:base', function () {
   var assets = useref.assets({
-    searchPath: ['./.tmp', './client']
+    searchPath: ['./.tmp', './src']
   });
 
   return gulp.src('./.tmp/index.html')
     .pipe(assets)
     .pipe(assets.restore())
     .pipe(useref())
-    .pipe(gulp.dest('./dist/public'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build:js', function(){
-  return gulp.src('dist/public/app/*.js')
+  return gulp.src('dist/js/*.js')
     .pipe(uglify())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/public/app'))
-    .pipe(rev.manifest('dist/public/rev-manifest.json', {
-        base: process.cwd() + '/dist/public',
+    .pipe(gulp.dest('./dist/js'))
+    .pipe(rev.manifest('dist/rev-manifest.json', {
+        base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist/public'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build:images', function() {
-  return gulp.src('./client/assets/images/**')
+  return gulp.src('./src/images/**')
     .pipe(imagemin())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/public/assets/images'))
-    .pipe(rev.manifest('dist/public/rev-manifest.json', {
-        base: process.cwd() + '/dist/public',
+    .pipe(gulp.dest('./dist/images'))
+    .pipe(rev.manifest('dist/rev-manifest.json', {
+        base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist/public'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build:css', function(){
-  var manifest = gulp.src('./dist/public/rev-manifest.json');
+  var manifest = gulp.src('./dist/rev-manifest.json');
 
-  return gulp.src('dist/public/app/*.css')
+  return gulp.src('dist/styles/*.css')
     .pipe(revReplace({manifest: manifest}))
     .pipe(minifyCss())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/public/app'))
-    .pipe(rev.manifest('dist/public/rev-manifest.json', {
-        base: process.cwd() + '/dist/public',
+    .pipe(gulp.dest('./dist/styles/'))
+    .pipe(rev.manifest('dist/rev-manifest.json', {
+        base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist/public'));
+    .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('build:html', function() {
-  var manifest = gulp.src('./dist/public/rev-manifest.json');
+  var manifest = gulp.src('./dist/rev-manifest.json');
 
-  return gulp.src('./dist/public/index.html')
+  return gulp.src('./dist/index.html')
     .pipe(revReplace({manifest: manifest}))
     .pipe(minifyHtml({
       empty: true,
       conditionals: true,
       quotes: true
     }))
-    .pipe(gulp.dest('./dist/public'));
+    .pipe(gulp.dest('./dist'));
 });
 
 // Copy all static assets
 gulp.task('build:assets', function() {
-  return gulp.src([
-    './client/assets/**',
-    '!./client/assets/images/**'
-  ]).pipe(gulp.dest('./dist/public/assets'));
+  gulp.src([
+    './src/fonts/**',
+  ]).pipe(gulp.dest('./dist/fonts'));
+
+  gulp.src([
+    './src/videos/**',
+  ]).pipe(gulp.dest('./dist/videos'));
 });
 
 gulp.task('build:bower_components', function() {
   return gulp.src([
-    './client/bower_components/**',
-  ]).pipe(gulp.dest('./dist/public/bower_components'));
+    './src/bower_components/**',
+  ]).pipe(gulp.dest('./dist/bower_components'));
 });
 
 gulp.task('build:clean', function () {
-  var src = [
-    './dist/public/app/app.min.css', 
-    './dist/public/app/vendor.min.css', 
-    './dist/public/app/app.min.js',
-    './dist/public/app/vendor.min.js', 
-  ];
-
-  var opts = { read: false };
-
-  return gulp.src(src, opts)
-    .pipe(clean());
+  return del([
+    './dist/styles/app.min.css', 
+    './dist/styles/vendor.min.css', 
+    './dist/js/app.min.js',
+    './dist/js/vendor.min.js', 
+  ]);
 });
 
 gulp.task('inject:html', function () {
-  return gulp.src('./client/index.html')
+  return gulp.src('./src/index.html')
     .pipe(wiredep({
       // we are importing this stuff in client/styles/app.less
       exclude: ['bootstrap/dist', 'font-awesome/css'],
       ignorePath: /^(\.\.\/)*\.\./
      }))
-    .pipe(gulp.dest('./client'));
+    .pipe(gulp.dest('./src'));
 });
 
 gulp.task('inject:less', function() {
   var lessFiles = gulp.src([
-    './client/app/**/*.less',
-    './client/components/**/*.less',
-    '!./client/app/app.less'
+    './src/styles/**/*.less',
+    '!./src/styles/app.less'
   ], { read: false })
 
   var options = {
     starttag: '/* inject:less */',
     endtag: '/* endinject */',
+    removeTags: false,
     transform: function (filepath) {
-      filepath = filepath.replace('./client/app/', '');
-      filepath = filepath.replace('./client/components/', '');
+      filepath = filepath.replace('./src/', '');
       return '@import ".' + filepath + '";';
     }
   };
 
-  return gulp.src('./client/app/app.less')
+  return gulp.src('./src/styles/app.less')
     .pipe(inject(lessFiles, options))
-    .pipe(gulp.dest('./client/app'));
+    .pipe(gulp.dest('./src/styles'));
 });
 
-gulp.task('less', function () {
-  return gulp.src('./client/app/app.less')
+gulp.task('compile:less', function () {
+  return gulp.src('./src/styles/app.less')
     .pipe(less({ paths: [      
-      path.join(__dirname, 'client/bower_components'),
-      path.join(__dirname, 'client/app'),
-      path.join(__dirname, 'client/components')
+      path.join(__dirname, 'src/bower_components'),
+      path.join(__dirname, 'src/styles'),
     ]}))
     .pipe(cmq())
-    .pipe(gulp.dest('./.tmp/app'));
+    .pipe(gulp.dest('./.tmp/styles'));
 });
 
 gulp.task('compile:html', function() {
-  return gulp.src(['client/index.html'])
+  return gulp.src(['src/index.html'])
     .pipe(fileinclude({
       prefix: '@@',
     }))
@@ -163,7 +159,7 @@ gulp.task('compile:html', function() {
 });
  
 gulp.task('serve:dev', function() {
-  return gulp.src(['./.tmp', './client'])
+  return gulp.src(['./.tmp', './src'])
     .pipe(webserver({
       livereload: true,
       open: true,
@@ -172,7 +168,7 @@ gulp.task('serve:dev', function() {
 });
 
 gulp.task('serve:build', function() {
-  return gulp.src('./dist/public')
+  return gulp.src('./dist')
     .pipe(webserver({
       livereload: false,
       open: true,
@@ -181,24 +177,23 @@ gulp.task('serve:build', function() {
 });
 
 gulp.task('watch:less', function () {
-  watch('client/**/*.less', function(vinyl) {
+  watch('src/styles/**/*.less', function(vinyl) {
     if (vinyl.event === 'change') {
-      gulp.series('less');
+      gulp.series('compile:less');
     } else {
       gulp.series('inject:less');
     }
   });
-
 });
 
 gulp.task('watch:html', function () {
-  watch(['client/**/*.html'], function(vinyl) {
+  watch(['src/**/*.html'], function(vinyl) {
     gulp.series('compile:html');
   });
 });
 
 gulp.task('watch:js', function () {
-  watch(['client/**/*.js'], function(vinyl) {
+  watch(['src/js/**/*.js'], function(vinyl) {
     if (vinyl.event === 'add') {
       gulp.series('inject:html');
     }
@@ -206,14 +201,22 @@ gulp.task('watch:js', function () {
 });
  
 gulp.task('clean', function () {
-  return gulp.src(['./.tmp', './dist'], {read: false})
-    .pipe(clean());
+  return del([
+    './.tmp',
+    './dist'
+  ]);
 });
+
+gulp.task('watch', gulp.parallel('watch:less', 'watch:html', 'watch:js'));
+
+gulp.task('inject', gulp.parallel('inject:html', 'inject:less'));
+
+gulp.task('compile', gulp.parallel('compile:html', 'compile:less'));
 
 gulp.task('build', gulp.series(
     'clean',
-    gulp.parallel('inject:html', 'inject:less'),
-    gulp.parallel('compile:html', 'less'),
+    'inject',
+    'compile',
     gulp.parallel(
       'build:assets', 
       'build:bower_components',
@@ -228,5 +231,11 @@ gulp.task('build', gulp.series(
     )
 ));
 
-gulp.task('watch', gulp.parallel('watch:less', 'watch:html', 'watch:js'));
-//gulp.task('default', ['serve:dev', 'watch']);
+gulp.task('default', gulp.series(
+  'inject',
+  'compile',
+  gulp.parallel(
+    'serve:dev', 
+    'watch'
+  )
+));

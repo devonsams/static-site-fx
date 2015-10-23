@@ -1,27 +1,26 @@
 {
-  "name": "signature-website",
+  "name": "my-signature-website",
   "version": "1.0.0",
   "description": "",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
-    "type": "git",
-    "url": "git+https://pos1tron@bitbucket.org/signaturedesign/signature-website.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/signaturedesign/signature-website#readme",
   "devDependencies": {
+    "atomus": "0.1.12",
+    "chai": "1.10.0",
+    "del": "^2.0.2",
     "gulp": "gulpjs/gulp#4.0",
-    "gulp-clean": "^0.3.1",
-    "gulp-cli": "gulpjs/gulp-cli#4.0",
     "gulp-combine-media-queries": "^0.2.0",
     "gulp-connect": "^2.2.0",
     "gulp-file-include": "^0.13.7",
     "gulp-if": "^1.2.5",
     "gulp-imagemin": "^2.3.0",
-    "gulp-inject": "^1.5.0",
+    "gulp-inject": "^3.0.0",
     "gulp-less": "^3.0.3",
     "gulp-md5-assets": "^0.1.9",
     "gulp-minify-css": "^1.2.0",
@@ -34,6 +33,8 @@
     "gulp-useref": "^1.3.0",
     "gulp-watch": "^4.3.5",
     "gulp-webserver": "^0.9.1",
+    "mocha": "2.1.0",
     "wiredep": "^2.2.2"
-  }
+  },
+  "dependencies": {}
 }
