@@ -177,25 +177,29 @@ gulp.task('serve:build', function() {
 });
 
 gulp.task('watch:less', function () {
+  var compile = gulp.series('compile:less');
+  var inject = gulp.series('inject:less');
   watch('src/styles/**/*.less', function(vinyl) {
     if (vinyl.event === 'change') {
-      gulp.series('compile:less');
+      compile();
     } else {
-      gulp.series('inject:less');
+      inject();
     }
   });
 });
 
 gulp.task('watch:html', function () {
+  var compile = gulp.series('compile:html')
   watch(['src/**/*.html'], function(vinyl) {
-    gulp.series('compile:html');
+    compile();
   });
 });
 
 gulp.task('watch:js', function () {
+  var inject = gulp.series('inject:html');
   watch(['src/js/**/*.js'], function(vinyl) {
     if (vinyl.event === 'add') {
-      gulp.series('inject:html');
+      inject();
     }
   });
 });
