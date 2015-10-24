@@ -1,31 +1,195 @@
-@media (max-height: 678px) and (max-width: 684px){
-	body {
-		font-size: 12px !important;
+/*******************************************************************************
+ * Filename     :     responsive.less  
+ * Author       :     Oberon Web Solutions
+ * Date         :     Oct, 2015
+ * Description  :     Contains all framework responsive styles
+ *
+ * -----------------------------------------------------------
+ * TABLE OF CONTENTS (TOC)
+ * -----------------------------------------------------------
+ *
+ *  1) Media Query: Max Width 320px
+ *  2) Media Query: Min Width 320px & Max Width 480px
+ *  3) Media Query: Max Width 480
+ *  4) Media Query: Max Width 600px
+ *  5) Media Query: Min Width 480px & Max Width 767px
+ *  6) Media Query: Max Width 767px
+ *  7) Media Query: Min Width 767px && Max Width 979px
+ *  8) Media Query: Min Width 979px
+ *  9) Media Query: Max Width 979px
+ *  10) Media Query: Max Width 1000px
+ *  11) Media Query: Min Width 1000px
+ *  12) Media Query: Max Width 1200px
+ *  13) Media Query: Min Width 1200px
+ *
+ ******************************************************************************/
+
+/*******************************************************************************
+ * 1) Media Query: Max Width 320px
+ ******************************************************************************/
+@media only screen and (max-width : 320px) {
+	#mob-nav {
+		visibility: visible;
+		opacity: 1;
+		position: fixed;
+		top:0;
+		left:0;
+		width:100%;
+		background-image: url('/images/nav-bg.png');
+		background-color: rgba(255, 255, 255, 0);
+		height: 70px;
+		z-index: 2000;
+		background-size: cover;
+		-webkit-box-shadow: 0px 5px 17px -5px rgba(0,0,0,0.59);
+		-moz-box-shadow: 0px 5px 17px -5px rgba(0,0,0,0.59);
+		box-shadow: 0px 5px 17px -5px rgba(0,0,0,0.59);
+
+		.nav-logo {
+			position: relative;
+			width: 140px;
+    		padding: 10px;
+			float: left;
+		}
+
+		.mob-menu {
+			position: relative;
+			float: right;
+			height: 70px;
+		    width: 70px;
+		    padding: 24.5px 23px;
+		    background-color: rgba(255,255,255,0.6);
+			.l {
+				width: 20px;
+				height: 2px;
+				display: block;
+				border-right: 12px solid rgba(0, 0, 0, 0.7);
+				border-left: 12px solid rgba(0, 0, 0, 0.7);
+				margin-bottom: 5px;
+				.nice-transition();
+			}
+
+			&:hover {
+
+				.l {
+					&:nth-child(1) {
+					    -moz-transform: scale(1,1) rotateZ(-45deg) translate3d(-5.5px,5.5px,0);
+					    -ms-transform: scale(1,1) rotateZ(-45deg) translate3d(-5.5px,5.5px,0);
+					    -webkit-transform: scale(1,1) rotateZ(-45deg) translate3d(-5.5px,5.5px,0);
+					    transform: scale(1,1) rotateZ(-45deg) translate3d(-5.5px,5.5px,0);
+					}
+					&:nth-child(2) {
+					    width: 10%;
+					    opacity: 0;
+					}
+					&:nth-child(3) {
+					    -moz-transform: scale(1,1) rotateZ(45deg) translate3d(-4px,-4.5px,0);
+					    -ms-transform: scale(1,1) rotateZ(45deg) translate3d(-4px,-4.5px,0);
+					    -webkit-transform: scale(1,1) rotateZ(45deg) translate3d(-4.5px,-4px,0);
+					    transform: scale(1,1) rotateZ(45deg) translate3d(-4px,-4.5px,0);
+					}
+				}
+			}
+
+			&:focus {
+				background-color: none !important;
+			}
+		}
 	}
 
-	#coffee {
-		width: 250px;
-		left:50%!important;
-		transform:translateX(-50%)!important;
-		bottom: 0px !important;
-	}
-
-}
-
-@media (max-width: 561px){
-	body {
-		font-size: 10px !important;
-	}
-	
 	.section-content {
-		top:20px !important;
-		left:20px !important;
-		margin-right:20px !important;
-		text-align: center;
+	    padding: 10px;
+	    position: absolute;
+	    top: 0;
+	    left: 0;
+	    font-size: 1.8em;
+	    color: #fff;
+	    font-weight: 100;
+	    text-align: center;
+	    height:100%;
 	}
 
-	#coffee {
-		width: 200px;
-		bottom: 0px !important;
-	}
-}
+	#section-1 {
+		.section-bg {
+			background-image: url('/images/bg1@2X.png');
+		}
+
+		.section-content {
+			padding-top: 80px;
+		}
+			
+		#tagline-growth {
+			position: relative;
+			top: 40px;
+			width:100%;
+		    padding: 10px;
+			z-index: 1;
+		}
+
+		#coffee {
+			position: absolute;
+			bottom: 0;
+			left: 5px;
+			width: 124px;
+			z-index: 3;
+		}
+
+		#notebook {
+			position: absolute;
+			bottom: 0;
+			right: -10px;
+			width: 240px;
+			z-index: 2;
+		}
+	}/* #section-1 */
+	
+	#section-2 {
+		.section-bg {
+			background-image: url('/images/bg2.png');
+			-webkit-box-shadow: 0px -5px 38px 4px rgba(0,0,0,0.63);
+			-moz-box-shadow: 0px -5px 38px 4px rgba(0,0,0,0.63);
+			box-shadow: 0px -5px 38px 4px rgba(0,0,0,0.63);
+		}
+
+		.section-content {
+			color: #7b7870;
+			padding: 30px 20px;
+			
+			.section-lead {
+				text-align: left;
+				font-weight: 200;
+				font-size: 0.9em;
+				margin-bottom: 30px;
+				line-height: 1.3em;
+			}
+
+			.marketing-partners {
+				text-align: left;
+				font-size: 0.7em;
+				font-weight: 200;
+				margin-bottom: 10px;
+				line-height: 1.3em;
+			}
+
+			ul {
+				text-align: left;
+			    margin: 0;
+   	 			padding-left: 30px;
+   	 			margin-bottom: 30px;
+
+				li {
+					font-size: 0.6em;
+    				font-weight: 200;
+				}
+			}
+
+			.videoWrapper {
+				margin-bottom: 30px;
+				img {
+					width:100%;
+				}
+			}
+		}
+	}/* #section-2 */
+
+
+}/* Media Query: Max Width 320px */

@@ -96,7 +96,7 @@ gulp.task('build:assets', function() {
 
 gulp.task('build:bower_components', function() {
   return gulp.src([
-    './src/bower_components/**',
+    './src/client/bower_components/**',
   ]).pipe(gulp.dest('./dist/bower_components'));
 });
 
@@ -143,7 +143,7 @@ gulp.task('inject:less', function() {
 gulp.task('compile:less', function () {
   return gulp.src('./src/styles/app.less')
     .pipe(less({ paths: [      
-      path.join(__dirname, 'src/bower_components'),
+      path.join(__dirname, 'src/client/bower_components'),
       path.join(__dirname, 'src/styles'),
     ]}))
     .pipe(cmq())
@@ -162,7 +162,7 @@ gulp.task('serve:dev', function() {
   return gulp.src(['./.tmp', './src'])
     .pipe(webserver({
       livereload: true,
-      open: true,
+      open: false,
       fallback: 'index.html'
     }));
 });

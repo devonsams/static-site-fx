@@ -9,17 +9,17 @@ $( document ).ready(function() {
 	function resizeDiv() {
 		vpw = $(window).width();
 		vph = $(window).height();
-		$("#section-1").css({"height": vph + "px"});
+		$(".panels").css({"min-height": vph + 50 + "px"});
 		$("#section-2").css({"margin-top": vph + "px"});
 	}
 
-			TweenMax.from("#coffee", 1, {opacity:0, left:-80, ease: Power4.easeOut, force3D:true});
-			TweenMax.from("#ipad", 1, {opacity:0, top:-300, ease: Power4.easeOut, delay:0.4, force3D:true});
-			TweenMax.from("#notebook", 1, {opacity:0, bottom:-300, ease: Power4.easeOut, delay:0.9, force3D:true});
-			TweenMax.from("#iphone", 1.5, {opacity:0, y:'+=50', ease: Power4.easeOut, delay:1.5, force3D:true});
-			TweenMax.from("#mags", 1, {opacity:0, right:-100, ease: Power4.easeOut, delay:1.8, force3D:true});
-			TweenMax.from("h2", 1, {opacity:0, y:'+=50', ease: Power2.easeOut, delay:2, force3D:true});
-			TweenMax.staggerFrom("h1, h5", 1, {opacity:0, y:'+=50', ease: Power2.easeOut, delay:2.5, force3D:true}, 0.1);
+			
+			
+			TweenMax.from("#coffee", 1, {opacity:0, x:'-=20', y:'+=30', ease: Power2.easeInOut, force3D:true});
+			TweenMax.from("#notebook", 1, {opacity:0, x:'+=20', y:'-=30', ease: Power2.easeInOut, delay:0.2, force3D:true});
+			TweenMax.from("#mob-nav", 1.8, {opacity:0, ease: Power0.easeOut, delay:0.2, force3D:true});
+			TweenMax.from("#tagline-growth", 1, {opacity:0, ease: Power0.easeInOut, delay:1.3, force3D:true});
+			
 	
 	/*$("body").queryLoader2({
 		
