@@ -18,56 +18,59 @@ var del = require('del');
 var wiredep = require('wiredep').stream;
 var inject = require('gulp-inject');
 var watch = require('gulp-watch');
+var merge = require('merge-stream');
+var awspublish = require('gulp-awspublish');
+var awsCredentials = require('./aws-credentials.json');
 
 gulp.task('build:base', function () {
   var assets = useref.assets({
-    searchPath: ['./.tmp', './src']
+    searchPath: ['.tmp', 'src']
   });
 
-  return gulp.src('./.tmp/index.html')
+  return gulp.src('.tmp/index.html')
     .pipe(assets)
     .pipe(assets.restore())
     .pipe(useref())
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:js', function(){
-  return gulp.src('dist/js/*.js')
+  return gulp.src('dist/js/*.js', { base: 'dist' })
     .pipe(uglify())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/js'))
+    .pipe(gulp.dest('dist'))
     .pipe(rev.manifest('dist/rev-manifest.json', {
         base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:images', function() {
-  return gulp.src('./src/images/**')
+  return gulp.src('src/images/**', { base: 'src' })
     .pipe(imagemin())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/images'))
+    .pipe(gulp.dest('dist'))
     .pipe(rev.manifest('dist/rev-manifest.json', {
         base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:css', function(){
-  var manifest = gulp.src('./dist/rev-manifest.json');
+  var manifest = gulp.src('dist/rev-manifest.json');
 
-  return gulp.src('dist/styles/*.css')
+  return gulp.src('dist/styles/*.css', { base: 'dist' })
     .pipe(revReplace({manifest: manifest}))
     .pipe(minifyCss())
     .pipe(rev())
-    .pipe(gulp.dest('./dist/styles/'))
+    .pipe(gulp.dest('dist'))
     .pipe(rev.manifest('dist/rev-manifest.json', {
         base: process.cwd() + '/dist',
         merge: true
     }))
-    .pipe(gulp.dest('./dist'));
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:html', function() {
@@ -96,8 +99,10 @@ gulp.task('build:assets', function() {
 
 gulp.task('build:bower_components', function() {
   return gulp.src([
-    './src/client/bower_components/**',
-  ]).pipe(gulp.dest('./dist/bower_components'));
+      'src/bower_components/bootstrap/fonts/**/*',
+      'src/bower_components/font-awesome/fonts/**/*'
+    ], { base: 'src' })
+    .pipe(gulp.dest('dist'));
 });
 
 gulp.task('build:clean', function () {
@@ -143,7 +148,7 @@ gulp.task('inject:less', function() {
 gulp.task('compile:less', function () {
   return gulp.src('./src/styles/app.less')
     .pipe(less({ paths: [      
-      path.join(__dirname, 'src/client/bower_components'),
+      path.join(__dirname, 'src/bower_components'),
       path.join(__dirname, 'src/styles'),
     ]}))
     .pipe(cmq())
@@ -162,7 +167,7 @@ gulp.task('serve:dev', function() {
   return gulp.src(['./.tmp', './src'])
     .pipe(webserver({
       livereload: true,
-      open: false,
+      open: true,
       fallback: 'index.html'
     }));
 });
@@ -177,25 +182,29 @@ gulp.task('serve:build', function() {
 });
 
 gulp.task('watch:less', function () {
+  var compile = gulp.series('compile:less');
+  var inject = gulp.series('inject:less');
   watch('src/styles/**/*.less', function(vinyl) {
     if (vinyl.event === 'change') {
-      gulp.series('compile:less');
+      compile();
     } else {
-      gulp.series('inject:less');
+      inject();
     }
   });
 });
 
 gulp.task('watch:html', function () {
+  var compile = gulp.series('compile:html')
   watch(['src/**/*.html'], function(vinyl) {
-    gulp.series('compile:html');
+    compile();
   });
 });
 
 gulp.task('watch:js', function () {
+  var inject = gulp.series('inject:html');
   watch(['src/js/**/*.js'], function(vinyl) {
     if (vinyl.event === 'add') {
-      gulp.series('inject:html');
+      inject();
     }
   });
 });
@@ -205,6 +214,22 @@ gulp.task('clean', function () {
     './.tmp',
     './dist'
   ]);
+});
+
+gulp.task('deploy', function() {
+  var plain = gulp.src('dist/images/**/*', { base: 'dist' });
+  var gzip = gulp.src(['dist/**/*', '!dist/images/**/*'])
+    .pipe(awspublish.gzip());
+  
+  var publisher = awspublish.create(awsCredentials);
+
+  merge(gzip, plain)
+    .pipe(publisher.publish({
+          'Cache-Control': 'max-age=315360000, no-transform, public'
+    }))
+    .pipe(publisher.sync())
+    .pipe(publisher.cache())
+    .pipe(awspublish.reporter());
 });
 
 gulp.task('watch', gulp.parallel('watch:less', 'watch:html', 'watch:js'));
