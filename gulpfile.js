@@ -184,7 +184,7 @@ gulp.task('serve:build', function() {
 gulp.task('watch:less', function () {
   var compile = gulp.series('compile:less');
   var inject = gulp.series('inject:less');
-  watch('src/styles/**/*.less', function(vinyl) {
+  return watch('src/styles/**/*.less', function(vinyl) {
     if (vinyl.event === 'change') {
       compile();
     } else {
@@ -195,14 +195,14 @@ gulp.task('watch:less', function () {
 
 gulp.task('watch:html', function () {
   var compile = gulp.series('compile:html')
-  watch(['src/**/*.html'], function(vinyl) {
+  return watch(['src/**/*.html'], function(vinyl) {
     compile();
   });
 });
 
 gulp.task('watch:js', function () {
   var inject = gulp.series('inject:html');
-  watch(['src/js/**/*.js'], function(vinyl) {
+  return watch(['src/js/**/*.js'], function(vinyl) {
     if (vinyl.event === 'add') {
       inject();
     }
@@ -223,7 +223,7 @@ gulp.task('deploy', function() {
   
   var publisher = awspublish.create(awsCredentials);
 
-  merge(gzip, plain)
+  return merge(gzip, plain)
     .pipe(publisher.publish({
           'Cache-Control': 'max-age=315360000, no-transform, public'
     }))
