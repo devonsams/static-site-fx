@@ -1,0 +1,540 @@
+// Global Components
+html,
+body {
+    height: 100%;
+    width: 100%;
+}
+
+body {
+    .serif-font;
+    overflow-x: hidden;
+    font-family: 'gandhi_sansregular', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+hr {
+    border-color: @theme-primary;
+    border-width: 3px;
+    max-width: 50px;
+}
+
+hr.light {
+    border-color: white;
+}
+
+a {
+    .transition-all;
+    color: @theme-primary;
+    &:hover,
+    &:focus {
+        color: darken(@theme-primary, 10%);
+    }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    .sans-serif-font;
+}
+
+p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 20px;
+    font-family: 'gandhi_sansregular', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.bg-primary {
+    background-color: @theme-primary;
+}
+
+.bg-dark {
+    background-color: @theme-dark;
+    color: white;
+}
+
+.text-faded {
+    color: fade(white, 70%);
+}
+
+section {
+    padding: 100px 0;
+}
+
+aside {
+    padding: 50px 0;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+// Navigation
+
+#mainNav {
+    display: block;
+    .container-fluid {
+        max-width: 1300px;
+    }
+}
+
+.navbar-default {
+    background-image: url('/images/nav-bg.png');
+    background-position-x: -60%;
+    height: 70px;
+    .sans-serif-font;
+    .transition-all;
+    .navbar-header .navbar-brand {
+        color: #000;
+        font-weight: 700;
+        text-transform: uppercase;
+        .sans-serif-font;
+        &:hover,
+        &:focus {
+            color: darken(@theme-primary, 10%);
+        }
+
+        img {
+            height:50px;
+            margin-top: -7px;
+        }
+    }
+    .nav {
+        > li {
+            > a,
+            > a:focus {
+                text-transform: uppercase;
+                font-weight: 700;
+                font-size: 13px;
+                color: #000000 !important;
+                padding-top: 25.5px;
+                padding-bottom: 25.5px;
+                &:hover {
+                    background-color: #000 !important;
+                    color: #fff !important;
+                }
+            }
+            &.active {
+                > a,
+                > a:focus {
+                    background-color: #000 !important;
+                    color: #fff !important;
+                    &:hover {
+                        color: #e8e8e8 !important;
+                    }
+                }
+            }
+        }
+    }
+
+    .navbar-toggle {
+        padding:20px;
+        border: none;
+
+          -webkit-tap-highlight-color: rgba(0,0,0,0);
+          -webkit-tap-highlight-color: transparent; /* For some Androids */
+
+        .nice-transition();
+
+        .icon-bar {
+            background-color: @dark-color;
+        }
+
+        &:hover, &:focus {
+            background-color: transparent;
+            border-radius: 0px;
+        }
+        &:active{
+            background-color: @dark-color;
+            .icon-bar {
+                background-color: #fff;
+            }
+        }
+    }
+    @media (min-width: 768px) {
+        background-color: transparent;
+        border-color: fade(white, 30%);
+        .navbar-header .navbar-brand {
+            color: fade(white, 70%);
+            &:hover,
+            &:focus {
+                color: white;
+            }
+        }
+        .nav > li > a,
+        .nav > li > a:focus {
+            color: fade(white, 70%);
+            &:hover {
+                color: white;
+            }
+        }
+    }
+}
+
+// Sections
+
+#about, #aspire, #methods {
+    background-size: cover;
+    background-repeat: no-repeat;
+    z-index: 2;
+}
+
+#about, #methods {
+    color: @dark-color;
+
+    p {
+        font-size: 22px;
+    }
+
+    ul {
+        font-size: 17px;
+    }
+
+    .btn {
+        border: 2px solid @dark-color;
+        color: @dark-color;
+
+        &:hover {
+            color: #fff;
+            background-color: @dark-color;
+        }
+    }
+
+    .btn-xl {
+        padding: 15px 60px;
+        font-size: 16px;
+    }
+}
+
+#about {
+    background-image: url('/images/bg2.jpg');
+
+    .video {
+        max-width:560px; 
+        width:100%;
+
+        .nice-transition();
+
+        img {
+            min-width: 280px;
+        }
+        
+    }
+
+    .info {
+        margin-top: 40px !important;
+        .nice-transition();
+    }
+
+    @media only screen and (max-width: 1200px) {
+        .info {
+            margin-top: 0 !important;
+        }
+
+        .video {
+            text-align: center;
+
+            img {
+                width: 100%;
+            }
+        }
+
+        .video, .info {
+            left: 50%;
+            -webkit-transform: translateX(-50%) !important;
+            -ms-transform: translateX(-50%) !important;
+            transform: translateX(-50%) !important;
+        }
+    }
+
+    @media only screen and (max-width: 400px) {
+        .info {
+            h2 {
+                font-size: 26px;
+            }
+
+            p {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+
+            ul {
+                font-size: 15px;
+            }
+        }
+    }
+}
+
+#aspire {
+    background-image: url('/images/bg3.jpg');
+    color:#fff;
+
+    .info {
+        padding-left: 70px;
+        h1 {
+            font-size: 70px;
+        }
+
+        .btn {
+            margin-top:50px;
+            margin-left:10px;
+        }
+    }
+
+    .aspireCard {
+        .nice-transition();
+
+        img {
+            .nice-transition();
+        }
+    }
+    
+    @media only screen and (max-width: 1280px) {
+        .aspireCard {
+            -webkit-transform: translateX(-100px) !important;
+            -ms-transform: translateX(-100px) !important;
+            transform: translateX(-100px)!important;
+        }
+    }
+    @media only screen and (max-width: 1165px) {
+        .aspireCard {
+            -webkit-transform: translateX(0px) !important;
+            -ms-transform: translateX(0px) !important;
+            transform: translateX(0px) !important;
+            img {
+                width: 90% !important;
+            }
+        }
+    }
+    @media only screen and (max-width: 600px) {
+        .aspireCard {
+            img {
+                width: 700px !important;
+                -webkit-transform: translateX(-100px) !important;
+                -ms-transform: translateX(-100px) !important;
+                transform: translateX(-100px) !important;
+            }
+        }
+
+        .info {
+            h1 {
+                font-size: 50px !important;
+            }
+
+            .btn {
+                margin-top:30px !important;
+            }      
+        }
+
+    }
+
+    @media only screen and (max-width: 520px) {
+        .aspireCard {
+            img {
+                -webkit-transform: translateX(-170px) !important;
+                -ms-transform: translateX(-170px) !important;
+                transform: translateX(-170px) !important;
+            }
+        }
+
+        .info {
+            padding-left: 0px !important;
+
+        }
+    }
+
+    @media only screen and (max-width: 430px) {
+        .aspireCard {
+            img {
+                width: 600px !important;
+            }
+        }
+    }
+
+    @media only screen and (max-width: 360px) {
+        .aspireCard {
+            img {
+                width: 450px !important;
+                -webkit-transform: translateX(-100px) !important;
+                -ms-transform: translateX(-100px) !important;
+                transform: translateX(-100px) !important;
+            }
+        }
+    }
+
+}
+
+#methods {
+    background: url('/images/features-1.jpg') no-repeat top left;
+    height:100%;
+
+    .container-fluid {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .method-item {
+        margin:0;
+        line-height: 1.5em;
+    }
+}
+
+.section-heading {
+    margin-top: 0;
+}
+
+.service-box {
+    max-width: 400px;
+    margin: 50px auto 0;
+    @media (min-width: 992px) {
+        margin: 20px auto 0;
+    }
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.portfolio-box {
+    position: relative;
+    display: block;
+    max-width: 650px;
+    margin: 0 auto;
+    .portfolio-box-caption {
+        color: white;
+        opacity: 0;
+        display: block;
+        background: fade(@theme-primary, 90%);
+        position: absolute;
+        bottom: 0;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        .transition-all;
+        .portfolio-box-caption-content {
+            width: 100%;
+            text-align: center;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            .project-category,
+            .project-name {
+                .sans-serif-font;
+                padding: 0 15px;
+            }
+            .project-category {
+                text-transform: uppercase;
+                font-weight: 600;
+                font-size: 14px;
+            }
+            .project-name {
+                font-size: 18px;
+            }
+        }
+    }
+    &:hover {
+        .portfolio-box-caption {
+            opacity: 1;
+        }
+    }
+    @media (min-width: 768px) {
+        .portfolio-box-caption {
+            .portfolio-box-caption-content {
+                .project-category {
+                    font-size: 16px;
+                }
+                .project-name {
+                    font-size: 22px;
+                }
+            }
+        }
+    }
+}
+
+.call-to-action {
+    h2 {
+        margin: 0 auto 20px;
+    }
+}
+
+// Bootstrap Overrides
+.text-primary {
+    color: @theme-primary;
+}
+
+.no-gutter > [class*='col-'] {
+    padding-right:0;
+    padding-left:0;
+}
+
+// Button Styles
+.btn-default {
+    .button-variant(@theme-dark;white;white);
+}
+
+.btn-primary {
+    .button-variant(white;@theme-primary;@theme-primary);
+}
+
+.btn {
+    .sans-serif-font;
+    border: 2px solid #fff;
+    border-radius: 0px;
+    font-weight: 700;
+    background: transparent;
+    text-transform: uppercase;
+    color: #fff;
+
+    &:hover {
+        color: #000;
+    }
+
+    i {
+        margin-left:15px;
+    }
+
+}
+
+.btn-xl {
+    padding: 15px 60px;
+    font-size: 16px;
+}
+
+// Extras
+// -- Highlight Color Customization
+::-moz-selection {
+    color: white;
+    text-shadow: none;
+    background: @theme-dark;
+}
+
+::selection {
+    color: white;
+    text-shadow: none;
+    background: @theme-dark;
+}
+
+img::selection {
+    color: white;
+    background: transparent;
+}
+
+img::-moz-selection {
+    color: white;
+    background: transparent;
+}
+
+body {
+    webkit-tap-highlight-color: @theme-dark;
+}
+
+.parallaxParent {
+    height: 100vh;
+    overflow: hidden;
+}
+.parallaxParent > * {
+    height: 200%;
+    position: relative;
+    top: -100%;
+}

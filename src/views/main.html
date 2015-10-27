@@ -1,63 +1,102 @@
-<!--<div id="loading"></div>-->
 
-<!--<div id="signature-wrapper">
-  
+  @@include('./nav.html')
 
-  <div class="panels" id="section-2" style="background-color:#fff; height:500px; position:relative;"></div>
-</div>-->
-
-<div id="signature-wrapper">
-  <nav id="mob-nav">
-    
-    <img class="nav-logo" src="images/logo.png" alt="Signature Design">
-      
-      <a href="#" class="mob-menu">
-          <span class="l"></span>
-          <span class="l"></span>
-          <span class="l"></span>
-      </a>
-
-
-  </nav>
- 
-
-
-
-
-
-
-  <div id="section-1" class="panels">
-    <div class="section-bg"></div>
-    <div class="section-content">
-      <img id="tagline-growth" src="images/growth@2X.png" alt=" ">
-      <img id="coffee" src="images/coffee@2X.png" alt=" ">
-      <img id="notebook" src="images/notebook@2x.png" alt=" "> 
-    </div>
-  </div>
-
-    <div id="section-2" class="panels">
-      <div class="section-bg"></div>
-      <div class="section-content">
-        <p class="section-lead">Signature Design’s mission & vision are unique to each client.</p>
-        
-        <p class="marketing-partners">By Becoming your marketing partners:</p>
-        <ul>
-          <li>Your goals are our goals.</li>
-          <li>Your brand is our business.</li>
-          <li>Your business is our brand.</li>
-          <li>Your successs is our focus.</li>
-          <li>Your acheivements are our success.</li>
-        </ul>
-
-        <div class="videoWrapper">
-          <img src="images/video-holder.png" alt=" ">
+    <header id="#header">
+        <div class="container-fluid" style="position:absolute;left:0; top:0; max-width:1600px; width:100%;">
+            <div class="row">
+        		<img class="header-item" id="growth" src="images/growth@2X.png" alt=" ">
+        		<img class="header-item" id="coffee" src="images/coffee@2X.png" alt=" ">
+        		<img class="header-item" id="notebook" src="images/notebook@2X.png" alt=" " >
+        		<img class="header-item" id="ipad" src="images/ipad.png" alt=" ">
+        		<img class="header-item" id="iphone" src="images/iphone.png" alt=" ">
+        		<img class="header-item" id="books" src="images/books.png" alt=" ">
+            </div>
         </div>
-      </div>
-    </div>
 
-    <div id="section-3" class="panels">We Aspire</div>
-    <div id="section-4" class="panels">Our Methods</div>
-    <div id="section-5" class="panels">Our Agency</div>
-    <div id="section-6" class="panels">Our Team</div>
-    <div id="section-7" class="panels">Contact</div>
-</div>
+    </header>
+
+    <section id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12"> <!--col-lg-offset-2-->
+	                <div class="col-md-6 col-md-push-6 info">
+	                    <h2 class="section-heading">Signature Design’s mission &amp; vision are unique to each client.</h2>
+	                    <p>By Becoming your marketing partners:</p>
+						<ul>
+				          <li>Your goals are our goals.</li>
+				          <li>Your brand is our business.</li>
+				          <li>Your business is our brand.</li>
+				          <li>Your successs is our focus.</li>
+				          <li>Your acheivements are our success.</li>
+						</ul>
+					</div>
+                    <div class="col-md-6 col-md-pull-6 video">
+                        <img src="images/video-holder.png" alt=" ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="aspire">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                	<div class="col-md-4 info">
+                        <h1 class="aspire-item section-heading" style="position:relative;">Let's</h1>
+                        <h1 class="aspire-item section-heading" style="position:relative;">Aspire</h1>
+                        <h1 class="aspire-item section-heading" style="position:relative;">Together.</h1>
+                        <a href="#" style="position:relative;" class="btn btn-default btn-xl aspire-item">Read More<i class="fa fa-chevron-right"></i></a>
+                	</div>
+                    <div class="col-md-8 aspireCard">
+                    	<img style="min-width:100%;width:auto;" src="images/aspire_card.png" alt=" ">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="methods">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 text-left">
+                    <h2 class="section-heading method-item">Our methods are</h2>
+                    <h2 class="section-heading method-item">fueled by</h2>
+                    <h2 class="section-heading method-item">creativity &amp; strategy,</h2>
+                    <h2 class="section-heading method-item">that just make sense &amp;</h2>
+                    <h2 class="section-heading method-item">produce results.</h2>
+            		<br>
+            		<a href="#" class="btn btn-default btn-xl method-item">Read More<i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <aside class="bg-dark">
+        <div class="container text-center">
+            <div class="call-to-action">
+                <h2>Get to know us!</h2>
+                <a href="#" class="btn btn-default btn-xl wow tada">Learn More!</a>
+            </div>
+        </div>
+    </aside>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="primary">
+                    <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+                <div class="col-lg-4 col-lg-offset-2 text-center">
+                    <i class="fa fa-phone fa-3x wow bounceIn"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <p><a href="mailto:your-email@your-domain.com">admin@signaturedesign.us</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
