@@ -20,18 +20,22 @@
             <div class="row">
                 <div class="col-lg-12"> <!--col-lg-offset-2-->
 	                <div class="col-md-6 col-md-push-6 info">
-	                    <h2 class="section-heading">Signature Design’s mission &amp; vision are unique to each client.</h2>
-	                    <p>By Becoming your marketing partners:</p>
+	                    <h2 class="section-heading about-item">Signature Design’s mission &amp; vision are unique to each client.</h2>
+	                    <p class="about-item">By Becoming your marketing partners:</p>
 						<ul>
-				          <li>Your goals are our goals.</li>
-				          <li>Your brand is our business.</li>
-				          <li>Your business is our brand.</li>
-				          <li>Your successs is our focus.</li>
-				          <li>Your acheivements are our success.</li>
+				          <li class="about-item">Your goals are our goals.</li>
+				          <li class="about-item">Your brand is our business.</li>
+				          <li class="about-item">Your business is our brand.</li>
+				          <li class="about-item">Your successs is our focus.</li>
+				          <li class="about-item">Your acheivements are our success.</li>
 						</ul>
 					</div>
-                    <div class="col-md-6 col-md-pull-6 video">
-                        <img src="images/video-holder.png" alt=" ">
+                    <div class="col-md-6 col-md-pull-6">
+                        <!--<img src="images/video-holder.png" alt=" ">-->
+                        <!-- 16:9 aspect ratio -->
+                        <div class="embed-responsive embed-responsive-16by9 about-item">
+                          <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9Sc-ir2UwGU?rel=0"></iframe>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -45,7 +49,7 @@
                 	<div class="col-md-4 info">
                         <h1 class="aspire-item section-heading" style="position:relative;">Let's</h1>
                         <h1 class="aspire-item section-heading" style="position:relative;">Aspire</h1>
-                        <h1 class="aspire-item section-heading" style="position:relative;">Together.</h1>
+                        <h1 class="aspire-item section-heading" style="position:relative;"><span>Together.</span></h1>
                         <a  class="btn btn-default btn-xl aspire-item" style="position:relative;" href="#">Read More<i class="fa fa-chevron-right"></i></a>
                 	</div>
                     <div class="col-md-8 aspireCard">
@@ -55,24 +59,9 @@
             </div>
         </div>
     </section>
-    
-    <section id="methods">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-3 text-left">
-                    <h2 class="section-heading method-item">Our methods are</h2>
-                    <h2 class="section-heading method-item">fueled by</h2>
-                    <h2 class="section-heading method-item">creativity &amp; strategy,</h2>
-                    <h2 class="section-heading method-item">that just make sense &amp;</h2>
-                    <h2 class="section-heading method-item">produce results.</h2>
-            		<br>
-            		<a href="#" class="btn btn-default btn-xl method-item">Read More<i class="fa fa-chevron-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <aside class="bg-dark">
+<!--
+    <aside id="quote">
         <div class="container text-center">
             <div class="call-to-action">
                 <hr / class="light">
@@ -82,37 +71,79 @@
             </div>
         </div>
     </aside>
+-->
+    
+    <section id="methods">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 text-left info">
+                    <h2 class="section-heading method-item">Our methods</h2>
+                    <h2 class="section-heading method-item">are fueled by</h2>
+                    <h2 class="section-heading method-item">creativity &amp; strategy,</h2>
+                    <h2 class="section-heading method-item">that simply</h2>
+                    <h2 class="section-heading method-item"><span>make sense</span> &amp;</h2>
+                    <h2 class="section-heading method-item"><span>produce results.<span></h2>
+            		<a href="#" class="btn btn-default btn-xl method-item">Read More<i class="fa fa-chevron-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="agency">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-md-8 col-md-offset-4 text-left">
+                <div class="col-md-4">
+                    <img src="/images/bg5.jpg" alt=" ">
+                </div>
+                <div class="col-md-8 text-left">
                     <h2 class="section-heading agency-item">You don't need a marketing team.</h2>
-                    <h2 class="section-heading agency-item">You just need the right marketing partner.</h2>
+                    <h2 class="section-heading agency-item">You just need <span>the right marketing partner.</span></h2>
                     <br>
-                    <a href="#" class="btn btn-default btn-xl method-item">Read More<i class="fa fa-chevron-right"></i></a>
+                    <a href="#" class="btn btn-default btn-xl agency-item">Read More<i class="fa fa-chevron-right"></i></a>
                 </div>
 
             </div>
         </div>
     </section>
 
-    <section id="contact">
-        <div class="container">
+    <section id="contact" style="background-color:#fff;">
+        <div id="split-profile" class="container-fluid">
+              @@include('./split-profile.html')
+        </div>
+        <div class="container" style="padding:100px 0;">
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 text-center">
                     <h2 class="section-heading">Let's Get In Touch!</h2>
                     <hr class="primary">
                     <p>Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
                 </div>
-                <div class="col-lg-4 col-lg-offset-2 text-center">
+                <div class="col-lg-4 text-center">
                     <i class="fa fa-phone fa-3x wow bounceIn"></i>
-                    <p>123-456-6789</p>
+                    <p>765-462-6777</p>
                 </div>
                 <div class="col-lg-4 text-center">
                     <i class="fa fa-envelope-o fa-3x wow bounceIn" data-wow-delay=".1s"></i>
-                    <p><a href="mailto:your-email@your-domain.com">admin@signaturedesign.us</a></p>
+                    <p><a href="mailto:your-email@your-domain.com">contact@signaturedesign.us</a></p>
+                </div>
+                <div class="col-lg-4 text-center">
+                    <i class="fa fa-map-marker fa-3x wow bounceIn" data-wow-delay=".1s"></i>
+                    <a href="https://www.google.com/maps/place/Signature+Design+Marketing+%26+Advertising+Agency/@39.833807,-84.8941896,17z/data=!3m1!4b1!4m2!3m1!1s0x884000fbed48c8d9:0x34cf7aef27fc629" target="_blank">
+                        <p style="margin-bottom: 0px;">185 Fort Wayne ave.</p>
+                        <p>Richmond, IN 47374</p>
+                    </a>
                 </div>
             </div>
         </div>
     </section>
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 pull-left text-left">
+                    <p><i class="fa fa-copyright"></i> Signature Design 2015</p>
+                </div>
+                <div class="col-md-4 pull-right text-right">
+                    <p>Developed with&nbsp;&nbsp;<i class="fa fa-heart"></i></p>
+                </div>
+            </div>
+        </div>
+    </footer>
