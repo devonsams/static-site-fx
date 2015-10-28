@@ -13,7 +13,7 @@ $( document ).ready(function() {
 		//$("#section-2").css({"margin-top": vph + "px"});
 	}
 	
-	$("body").queryLoader2({
+	/*$("body").queryLoader2({
 		
 		barColor: "#fff",
 	    backgroundColor: "#fff",
@@ -53,7 +53,7 @@ $( document ).ready(function() {
 				}
 			});
 		}
-	});
+	});*/ //turn #loading display on
 
 	var controller = new ScrollMagic.Controller();
 
