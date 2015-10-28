@@ -11,6 +11,42 @@ body {
     font-family: 'gandhi_sansregular', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
+#loading {
+   width: 100%;
+   height: 100%;
+   top: 0px;
+   left: 0px;
+   position: fixed;
+   display: block;
+   opacity: 1;
+   background-color: #fff;
+   z-index: 9999999;
+   text-align: center;
+
+   .nice-transition();
+
+    @keyframes loadinglogo {
+        from {max-width: 650px; opacity: 0.5;}
+        to {max-width: 500px; opacity: 1;}
+    }
+
+   .loading-logo {
+        max-width: 500px;
+        opacity:1;
+        width:90%;
+        animation-name: loadinglogo;
+        animation-duration: 2s;
+        padding: 20px;
+
+        -webkit-transform: translateY(-50px);
+        -moz-transform:    translateY(-50px);
+        -ms-transform:     translateY(-50px);
+        -o-transform:      translateY(-50px);
+        transform:         translateY(-50px);
+
+   }
+}
+
 hr {
     border-color: @theme-primary;
     border-width: 3px;
@@ -76,8 +112,9 @@ aside {
 #mainNav {
     display: block;
     .container-fluid {
-        max-width: 1300px;
+         max-width: 1300px;
     }
+   
 }
 
 .navbar-default {
@@ -101,6 +138,36 @@ aside {
             margin-top: -7px;
         }
     }
+
+    .nav {
+        li {
+            a.social-icons, a.social-icons:focus {
+                font-size: 12px !important;
+                padding: 0 !important;
+                top: 20px;
+                width: 30px;
+                height: 30px;
+                display: block;
+                overflow: hidden;
+                line-height: 28px;
+                text-align: center;
+                border: 2px solid #000;
+                background-color: rgba(255,255,255,0.6);
+                border-radius: 50%;
+                color: #000 !important;
+                cursor: pointer;
+                margin-left:10px;
+        
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+                  -webkit-tap-highlight-color: transparent; /* For some Androids */
+
+                &:hover {
+                    background-color: #000 !important;
+                    color: #fff !important;
+                }
+            }
+        }
+    }
     .nav {
         > li {
             > a,
@@ -117,13 +184,25 @@ aside {
                 }
             }
             &.active {
-                > a,
+                > a
                 > a:focus {
                     background-color: #000 !important;
                     color: #fff !important;
                     &:hover {
                         color: #e8e8e8 !important;
                     }
+                }
+            }
+        }
+    }
+
+    .nav {
+        li {
+            a.active {
+                background-color: #000 !important;
+                color: #fff !important;
+                &:hover {
+                    color: #e8e8e8 !important;
                 }
             }
         }

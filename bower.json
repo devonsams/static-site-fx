@@ -16,7 +16,8 @@
     "enquire": "~2.1.2",
     "font-awesome": ">=4.1.0",
     "gsap": "greensock/GreenSock-JS",
-    "scrollmagic": "~2.0.5"
+    "scrollmagic": "~2.0.5",
+    "queryloader2": "~3.0.15"
   },
   "overrides": {
     "gsap": {
