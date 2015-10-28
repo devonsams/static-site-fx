@@ -86,13 +86,20 @@ gulp.task('build:html', function() {
     .pipe(gulp.dest('./dist'));
 });
 
-// Copy all static assets
-gulp.task('build:assets', function() {
-  gulp.src([
+// Copy all fonts
+gulp.task('build:fonts', function() {
+  return gulp.src([
     './src/fonts/**',
   ]).pipe(gulp.dest('./dist/fonts'));
 
   gulp.src([
+    './src/videos/**',
+  ]).pipe(gulp.dest('./dist/videos'));
+});
+
+// Copy all videos
+gulp.task('build:videos', function() {
+  return gulp.src([
     './src/videos/**',
   ]).pipe(gulp.dest('./dist/videos'));
 });
@@ -135,8 +142,8 @@ gulp.task('inject:less', function() {
     endtag: '/* endinject */',
     removeTags: false,
     transform: function (filepath) {
-      filepath = filepath.replace('./src/', '');
-      return '@import ".' + filepath + '";';
+      filepath = filepath.replace('/src/styles/', '');
+      return '@import "' + filepath + '";';
     }
   };
 
@@ -243,7 +250,8 @@ gulp.task('build', gulp.series(
     'inject',
     'compile',
     gulp.parallel(
-      'build:assets', 
+      'build:fonts',
+      'build:videos', 
       'build:bower_components',
       gulp.series(
         'build:base', 
