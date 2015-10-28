@@ -81,26 +81,62 @@ $( document ).ready(function() {
 
 	// About Scene
 	var about_scene = new ScrollMagic.Scene({
-	  triggerElement: '#about'
+	  triggerElement: '#about',
+	  duration: function() {
+	  	return $('#about').outerHeight();
+	  }
 	})
-	.setTween(about_tween);
+	.on("start", about_tween)
+	.addIndicators()
+	.setClassToggle(".about-tab", "active");
 
 	// Aspire Scene
 	var aspire_scene = new ScrollMagic.Scene({
-	  triggerElement: '#aspire'
+	  triggerElement: '#aspire',
+	  duration: function() {
+	  	return $('#aspire').outerHeight();
+	  }
 	})
-	.setTween(aspire_tween);
+	.setTween(aspire_tween)
+	.addIndicators()
+	.setClassToggle(".aspire-tab", "active");
 
 	// Methods Scene
 	var methods_scene = new ScrollMagic.Scene({
-	  triggerElement: '#methods'
+	  triggerElement: '#methods',
+	  duration: function() {
+	  	return $('#methods').outerHeight();
+	  }
 	})
-	.setTween(methods_tween);
+	.setTween(methods_tween)
+	.setClassToggle(".methods-tab", "active");
+
+	// Agency Scene
+	var agency_scene = new ScrollMagic.Scene({
+	  triggerElement: '#agency',
+	  duration: function() {
+	  	return $('#agency').outerHeight();
+	  }
+	})
+	//.setTween(methods_tween)
+	.setClassToggle(".agency-tab", "active");
+
+	// Contact Scene
+	var contact_scene = new ScrollMagic.Scene({
+	  triggerElement: '#contact',
+	  duration: function() {
+	  	return $('#contact').outerHeight();
+	  }
+	})
+	//.setTween(methods_tween)
+	.setClassToggle(".contact-tab", "active");
 
 	controller.addScene([
 	  about_scene,
 	  aspire_scene,
-	  methods_scene
+	  methods_scene,
+	  agency_scene,
+	  contact_scene
 	]);
 
 
