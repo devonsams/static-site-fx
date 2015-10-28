@@ -10,10 +10,9 @@ $( document ).ready(function() {
 		vpw = $(window).width();
 		vph = $(window).height();
 		$("#loading").css({"min-height": vph + "px"});
-		//$("#section-2").css({"margin-top": vph + "px"});
 	}
 	
-	/*$("body").queryLoader2({
+	$("body").queryLoader2({
 		
 		barColor: "#fff",
 	    backgroundColor: "#fff",
@@ -25,44 +24,41 @@ $( document ).ready(function() {
 		
 		onComplete: function() {
 
-			TweenMax.to("body", 0.5, {
+			TweenMax.to('#loading', 0.1, {
+				autoAlpha:0, 
 				ease: Power0.easeOut, 
-				force3D:true,
-				autoAlpha:1, 
-				onStart: function() {
-					TweenMax.to('#loading', 0.1, {
-						autoAlpha:0, 
-						ease: Power0.easeOut, 
-						force3D:true
-					});
-					TweenMax.staggerFrom('.header-item', 1, {
-						opacity:0, 
-						x:'-=50',
-						display:"none",
-						ease: Power4.easeInOut,
-						force3D: true,
-						delay:0.1
-					}, 0.1);
-					TweenMax.from('#mainNav', 0.7, {
-						opacity:0, 
-						y:-100,	
-						ease: Power0.easeOut,
-						display:"none",
-						delay: 1
-					});
-				}
+				force3D:true
+			});
+			TweenMax.staggerFrom('.header-item', 1, {
+				opacity:0, 
+				x:'-=50',
+				display:"none",
+				ease: Power4.easeInOut,
+				force3D: true,
+				delay:0.1
+			}, 0.1);
+			TweenMax.from('#mainNav', 0.7, {
+				opacity:0, 
+				y:-100,	
+				ease: Power0.easeOut,
+				display:"none",
+				delay: 1
 			});
 		}
-	});*/ //turn #loading display on
+	});
 
 	var controller = new ScrollMagic.Controller();
 
+/*===================================================================
+	SETUP
+====================================================================*/	
+
 	// About Animation Setup
-	var about_tween = TweenMax.staggerFrom('.col-md-6', 0.6, {
-			opacity:0, 
-			y:'-=100',	
-			ease: Power2.easeInOut
-		}, 0.2);
+	var about_tween = TweenMax.staggerFrom('.about-item', 1, {
+		opacity:0, 
+		scale:0.5,	
+		ease: Elastic.easeOut.config(1, 0.5)
+	}, 0.05);
 
 	// Aspire Animation Setup
 	var aspire_tween = TweenMax.staggerFrom('.aspire-item', 0.4, {
@@ -79,10 +75,29 @@ $( document ).ready(function() {
 		ease: Power4.easeOut
 	}, 0.1);
 
+	// Agency Animation Setup
+	var agency_tween = TweenMax.staggerFrom('.agency-item', 0.4, {
+		opacity:0, 
+		x:'+=100',	
+		ease: Power4.easeOut
+	}, 0.1);
+
+	// Split-Profile Animation Setup
+	var splitProfile_tween = TweenMax.staggerFrom('.splitProfile-item', 1, {
+		opacity:0, 
+		scale:0,	
+		ease: Elastic.easeOut.config(1, 0.5)
+	}, 0.1);
+
+/*===================================================================
+	SCENES
+====================================================================*/	
 	// About Scene
 	var about_scene = new ScrollMagic.Scene({
-	  triggerElement: '#about'
+	  triggerElement: '#about',
+	  offset:-250
 	})
+	//.addIndicators()
 	.setTween(about_tween);
 
 	// Aspire Scene
@@ -97,10 +112,28 @@ $( document ).ready(function() {
 	})
 	.setTween(methods_tween);
 
+	// Agency Scene
+	var agency_scene = new ScrollMagic.Scene({
+	  triggerElement: '#agency'
+	})
+	.setTween(agency_tween);
+
+	// Split-Profile Scene
+	var splitProfile_scene = new ScrollMagic.Scene({
+	  triggerElement: '#split-profile'
+	})
+	.setTween(splitProfile_tween);
+
+/*===================================================================
+	ADD
+====================================================================*/	
+
 	controller.addScene([
 	  about_scene,
 	  aspire_scene,
-	  methods_scene
+	  methods_scene,
+	  agency_scene,
+	  splitProfile_scene
 	]);
 
 
@@ -124,29 +157,4 @@ $( document ).ready(function() {
 			}
 		}
 	});
-
-	/*enquire.register("screen and (max-width:820px)", {
-		match : function() {
-			TweenMax.to("body", 0.01, {opacity:0, ease: Power0.easeOut, force3D:true});
-			TweenMax.to("body", 0.6, {opacity:1, ease: Power0.easeOut, delay:0.8, force3D:true});
-
-			var slidesNav = $('.fp-slidesNav.bottom');
-			$('body').addClass( "mobV" );
-
-			//Section 5 video removal
-			var videoDiv = $('#video-bg');
-			videoDiv.empty();
-		},
-		unmatch : function() {
-			TweenMax.to("body", 0.01, {opacity:0, ease: Power0.easeOut, force3D:true});
-			TweenMax.to("body", 0.6, {opacity:1, ease: Power0.easeOut,delay:0.8, force3D:true});
-
-			$('body').removeClass( "mobV" );
-
-			//Section 5 video addition
-			var videoDiv = $('#video-bg');
-			videoDiv.append('<video autoplay loop muted id="myVideo" ><source src="videos/flowers.mp4" type="video/mp4"><source src="videos/flowers.webm" type="video/webm"></video>');
-		}
-	});*/
-
 });
