@@ -57,19 +57,10 @@ $( document ).ready(function() {
 
 	var controller = new ScrollMagic.Controller();
 
-	// Nav Animation Setup
-	var nav_tween = TweenMax.from('#mainNav', 0.7, {
-		opacity:0, 
-		y:-100,	
-		ease: Power0.easeOut,
-		display:"none",
-		delay: 1
-	});
-
 	// About Animation Setup
 	var about_tween = TweenMax.staggerFrom('.col-md-6', 0.6, {
 			opacity:0, 
-			x:'+=200',	
+			y:'-=100',	
 			ease: Power2.easeInOut
 		}, 0.2);
 
@@ -92,19 +83,22 @@ $( document ).ready(function() {
 	var about_scene = new ScrollMagic.Scene({
 	  triggerElement: '#about'
 	})
-	.setTween(about_tween);
+	.setTween(about_tween)
+	.setClassToggle(".about-tab", "active");
 
 	// Aspire Scene
 	var aspire_scene = new ScrollMagic.Scene({
 	  triggerElement: '#aspire'
 	})
-	.setTween(aspire_tween);
+	.setTween(aspire_tween)
+	.setClassToggle(".aspire-tab", "active");
 
 	// Methods Scene
 	var methods_scene = new ScrollMagic.Scene({
 	  triggerElement: '#methods'
 	})
-	.setTween(methods_tween);
+	.setTween(methods_tween)
+	.setClassToggle(".methods-tab", "active");
 
 	controller.addScene([
 	  about_scene,

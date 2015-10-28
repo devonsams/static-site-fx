@@ -138,6 +138,36 @@ aside {
             margin-top: -7px;
         }
     }
+
+    .nav {
+        li {
+            a.social-icons, a.social-icons:focus {
+                font-size: 12px !important;
+                padding: 0 !important;
+                top: 20px;
+                width: 30px;
+                height: 30px;
+                display: block;
+                overflow: hidden;
+                line-height: 28px;
+                text-align: center;
+                border: 2px solid #000;
+                background-color: rgba(255,255,255,0.6);
+                border-radius: 50%;
+                color: #000 !important;
+                cursor: pointer;
+                margin-left:10px;
+        
+                  -webkit-tap-highlight-color: rgba(0,0,0,0);
+                  -webkit-tap-highlight-color: transparent; /* For some Androids */
+
+                &:hover {
+                    background-color: #000 !important;
+                    color: #fff !important;
+                }
+            }
+        }
+    }
     .nav {
         > li {
             > a,
@@ -154,13 +184,25 @@ aside {
                 }
             }
             &.active {
-                > a,
+                > a
                 > a:focus {
                     background-color: #000 !important;
                     color: #fff !important;
                     &:hover {
                         color: #e8e8e8 !important;
                     }
+                }
+            }
+        }
+    }
+
+    .nav {
+        li {
+            a.active {
+                background-color: #000 !important;
+                color: #fff !important;
+                &:hover {
+                    color: #e8e8e8 !important;
                 }
             }
         }
