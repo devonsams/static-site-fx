@@ -83,22 +83,19 @@ $( document ).ready(function() {
 	var about_scene = new ScrollMagic.Scene({
 	  triggerElement: '#about'
 	})
-	.setTween(about_tween)
-	.setClassToggle(".about-tab", "active");
+	.setTween(about_tween);
 
 	// Aspire Scene
 	var aspire_scene = new ScrollMagic.Scene({
 	  triggerElement: '#aspire'
 	})
-	.setTween(aspire_tween)
-	.setClassToggle(".aspire-tab", "active");
+	.setTween(aspire_tween);
 
 	// Methods Scene
 	var methods_scene = new ScrollMagic.Scene({
 	  triggerElement: '#methods'
 	})
-	.setTween(methods_tween)
-	.setClassToggle(".methods-tab", "active");
+	.setTween(methods_tween);
 
 	controller.addScene([
 	  about_scene,
