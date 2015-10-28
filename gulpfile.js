@@ -135,8 +135,8 @@ gulp.task('inject:less', function() {
     endtag: '/* endinject */',
     removeTags: false,
     transform: function (filepath) {
-      filepath = filepath.replace('./src/', '');
-      return '@import ".' + filepath + '";';
+      filepath = filepath.replace('/src/styles/', '');
+      return '@import "' + filepath + '";';
     }
   };
 
