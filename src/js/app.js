@@ -4,7 +4,6 @@ $( document ).ready(function() {
 
 	window.onresize = function(event) {
 		resizeDiv();
-		sections = gatherSections();
 	}
 
 	function resizeDiv() {
@@ -96,37 +95,13 @@ $( document ).ready(function() {
 	SCENES
 ====================================================================*/	
 	
-	var sections = gatherSections();
+	var startingHash = window.location.hash ? '#' + window.location.hash : null;
+	toggleActiveNav(startingHash);
 
-	function gatherSections() {
-		var sections = [];
-		$('section').each(function() {
-			var top = $(this).offset().top - 200;
-			var height = top + $(this).height();
-			sections.push({
-				top: top,
-				height: height,
-				hash: '#' + $(this).attr('id')
-			});
-		});
-		return sections;
-	}
-
-	function getSectionByYOffset(event) {
-		var section;
-		var y = window.pageYOffset + (event.progress ? 400 : 10);
-		$.each(sections, function() {
-			if (this.top < y && this.height > y) {
-	            section = this;
-	        }
-		});
-		return section;
-	}
-
-	function progressHashSync(event) {
-		var section = getSectionByYOffset(event);
-		var hash = section ? section.hash || null : null;
-		console.log(hash);
+	function progressHashSync(e) {
+		var target = $(e.target.triggerElement());
+		var nextScene = e.progress ? target : target.prev('section');
+		var hash = nextScene.length ? '#' + nextScene.attr('id') : null
 		updateHash(hash);
 		toggleActiveNav(hash);
 	}
@@ -145,56 +120,26 @@ $( document ).ready(function() {
 	}
 
 	function toggleActiveNav(hash) {
+		hash = hash || '#page-top';
 		$('.page-scroll').removeClass('active');
 		if (hash) $('.page-scroll[href="' + hash + '"]').addClass('active');
 	}
 
-	// About Scene
-	var about_scene = new ScrollMagic.Scene({
-	  triggerElement: '#about',
-	  offset: -200,
-	})
-	.addIndicators()
-	.setTween(about_tween)
-	//.setClassToggle(".about-tab", "active")
-	.on('progress', progressHashSync);
+	function createScene(hash, tween, offset) {
+		return new ScrollMagic.Scene({
+		  triggerElement: hash,
+		  offset: offset
+		})
+		.addIndicators()
+		.setTween(tween)
+		.on('progress', progressHashSync);
+	}
 
-	// Aspire Scene
-	var aspire_scene = new ScrollMagic.Scene({
-	  triggerElement: '#aspire',
-	  offset: -200,
-	})
-	.setTween(aspire_tween)
-	.addIndicators()
-	//.setClassToggle(".aspire-tab", "active")
-	.on('progress', progressHashSync);
-
-	// Methods Scene
-	var methods_scene = new ScrollMagic.Scene({
-	  triggerElement: '#methods',
-	  offset: -200,
-	})
-	.setTween(methods_tween)
-	//.setClassToggle(".methods-tab", "active")
-	.on('progress', progressHashSync);
-
-	// Agency Scene
-	var agency_scene = new ScrollMagic.Scene({
-	  triggerElement: '#agency',
-	  offset: -200,
-	})
-	.setTween(agency_tween)
-	//.setClassToggle(".agency-tab", "active")
-	.on('progress', progressHashSync);
-
-	// Split-Profile Scene
-	var splitProfile_scene = new ScrollMagic.Scene({
-	  triggerElement: '#split-profile',
-	  offset: -200,
-	})
-	.setTween(splitProfile_tween)
-	//.setClassToggle(".contact-tab", "active")
-	.on('progress', progressHashSync);
+	var about_scene = createScene('#about', about_tween, -200);
+	var aspire_scene = createScene('#aspire', aspire_tween, -100);
+	var methods_scene = createScene('#methods', methods_tween, -200);
+	var agency_scene = createScene('#agency', agency_tween, -200);
+	var splitProfile_scene = createScene('#contact', splitProfile_tween, -100);
 
 /*===================================================================
 	ADD
