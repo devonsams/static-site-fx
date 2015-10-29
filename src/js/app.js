@@ -123,32 +123,53 @@ $( document ).ready(function() {
 		if (hash) $('.page-scroll[href="' + hash + '"]').addClass('active');
 	}
 
-	function createScene(hash, tween, offset) {
-		return new ScrollMagic.Scene({
-		  triggerElement: hash,
-		  offset: offset
-		})
-		.addIndicators()
-		.setTween(tween)
-		.on('progress', progressHashSync);
+	function dynamicDuration() {
+	  	if (this.triggerElement) return $(this.triggerElement()).outerHeight();
+	  	return 0
 	}
 
-	var about_scene = createScene('#about', about_tween, -200);
-	var aspire_scene = createScene('#aspire', aspire_tween, -100);
-	var methods_scene = createScene('#methods', methods_tween, -200);
-	var agency_scene = createScene('#agency', agency_tween, -200);
-	var splitProfile_scene = createScene('#contact', splitProfile_tween, -100);
+	function createScene(hash, offset, duration, tween) {
+		var scene = new ScrollMagic.Scene({
+		  triggerElement: hash,
+		  offset: offset || 0,
+		  duration: duration || 0
+		})
+		//.addIndicators()
+		.on('progress', progressHashSync);
+		if (tween) scene.setTween(tween)
+		return scene;
+	}
+
+	var about_scene1 = createScene('#about', 0, dynamicDuration);
+	var about_scene2 = createScene('#about', -200, 0, about_tween);
+
+	var aspire_scene1 = createScene('#aspire', 50, dynamicDuration);
+	var aspire_scene2 = createScene('#aspire', -200, 0, aspire_tween);
+
+	var methods_scene1 = createScene('#methods', 0, dynamicDuration);
+	var methods_scene2 = createScene('#methods', -200, 0, methods_tween);
+
+	var agency_scene1 = createScene('#agency', 0, dynamicDuration);
+	var agency_scene2 = createScene('#agency',-200, 0, agency_tween);
+
+	var splitProfile_scene1 = createScene('#contact', 0, dynamicDuration);
+	var splitProfile_scene2 = createScene('#contact', -200, 0, splitProfile_tween);
 
 /*===================================================================
 	ADD
 ====================================================================*/	
 
 	controller.addScene([
-	  about_scene,
-	  aspire_scene,
-	  methods_scene,
-	  agency_scene,
-	  splitProfile_scene
+	  about_scene1,
+	  aspire_scene1,
+	  methods_scene1,
+	  agency_scene1,
+	  splitProfile_scene1,
+	  about_scene2,
+	  aspire_scene2,
+	  methods_scene2,
+	  agency_scene2,
+	  splitProfile_scene2
 	]);
 
 
