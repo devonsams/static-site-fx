@@ -4,6 +4,10 @@
 		margin:0;
 	}
 
+    -webkit-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
+    -moz-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
+    box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
+
 @primary-color:#c1bbaf;
 
 
@@ -12,9 +16,10 @@
 		text-align: center;
 		-webkit-backface-visibility: hidden;
 		padding: 100px 0;
-	    -webkit-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
-	    -moz-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
-	    box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
+
+		@media only screen and (max-width: 990px) {
+			padding: 0 !important;
+		}
 
 		.intro-content {
 			padding: 7em 1em;
@@ -27,6 +32,18 @@
 			transform: translateY(-50%) translateX(-50%);
 			*/
 
+			@media only screen and (max-width: 990px) {
+				padding: 3em 1em !important;
+			}
+
+			@media only screen and (max-width: 650px) {
+				padding: 3em 0.5em !important;
+			}
+
+			@media only screen and (max-width: 500px) {
+				padding: 2em 0.5em !important;
+			}
+
 			.profile {
 				margin: 0 auto;
 				width: 140px;
@@ -37,6 +54,10 @@
 					max-width: 100%;
 					border-radius: 50%;
 					opacity: 0.87;
+				}
+				@media only screen and (max-width: 650px) {
+					width: 110px !important;
+					height: 110px !important;
 				}
 			}
 
@@ -65,14 +86,85 @@
 						margin-bottom: 10px;
 					}
 				}
+
+			   @media only screen and (max-width: 950px) {
+					h1 {
+						font-size: 30px !important;
+					}
+
+					h2 {
+					    font-size: 16px !important;
+					}
+
+					hr {
+					    max-width: 100px !important;
+					}
+
+					p {
+						margin-top:30px !important;
+
+						.fa {
+							font-size: 22px !important;
+						}
+					}
+			    }
+
+		    	@media only screen and (max-width: 650px) {
+
+					h1 {
+						font-size: 28px !important;
+					}
+
+					h2 {
+					    font-size: 14px !important;
+					}
+
+					hr {
+					    max-width: 70px !important;
+					}
+
+					p {
+						font-size: 14px !important;
+
+						.fa {
+							font-size: 20px !important;
+							margin-bottom:5px !important;
+						}
+					}
+		    	}
+
+				@media only screen and (max-width: 500px) {
+					h1 {
+						font-size: 28px !important;
+					}
+
+					h2 {
+					    font-size: 14px !important;
+					}
+
+					hr {
+					    margin-top:10px !important;
+					    margin-bottom:10px !important;
+					}
+
+					p {
+						margin-top:20px !important;
+						font-size: 14px !important;
+
+						.fa {
+							font-size: 20px !important;
+							margin-bottom:5px !important;
+						}
+					}
+				}
 			}
+
 		}
 	}
 
 
-
 	.side-left {
-	    background: url('/images/wall_bg@2X.png') repeat;
+	    background: url('/images/wall_bg.png') repeat;
 		background-size: contain;
 		background-color: @primary-color;
 		color: @dark-color;
