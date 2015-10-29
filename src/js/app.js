@@ -92,37 +92,52 @@ $( document ).ready(function() {
 /*===================================================================
 	SCENES
 ====================================================================*/	
-	// About Scene
-	var about_scene = new ScrollMagic.Scene({
-	  triggerElement: '#about',
-	  offset:-250
-	})
-	//.addIndicators()
-	.setTween(about_tween);
+	
+	var startingHash = window.location.hash ? '#' + window.location.hash : null;
+	toggleActiveNav(startingHash);
 
-	// Aspire Scene
-	var aspire_scene = new ScrollMagic.Scene({
-	  triggerElement: '#aspire'
-	})
-	.setTween(aspire_tween);
+	function progressHashSync(e) {
+		var target = $(e.target.triggerElement());
+		var nextScene = e.progress ? target : target.prev('section');
+		var hash = nextScene.length ? '#' + nextScene.attr('id') : null
+		updateHash(hash);
+		toggleActiveNav(hash);
+	}
 
-	// Methods Scene
-	var methods_scene = new ScrollMagic.Scene({
-	  triggerElement: '#methods'
-	})
-	.setTween(methods_tween);
+	function updateHash(hash) {
+        if (history.pushState) {
+        	if (hash) {
+	    		history.pushState(null, null, hash);
+	    	} else {
+	    		history.pushState("", document.title, window.location.pathname);
+	    	}
+		}
+		else {
+		    location.hash = hash || '';
+		}
+	}
 
-	// Agency Scene
-	var agency_scene = new ScrollMagic.Scene({
-	  triggerElement: '#agency'
-	})
-	.setTween(agency_tween);
+	function toggleActiveNav(hash) {
+		hash = hash || '#page-top';
+		$('.page-scroll').removeClass('active');
+		if (hash) $('.page-scroll[href="' + hash + '"]').addClass('active');
+	}
 
-	// Split-Profile Scene
-	var splitProfile_scene = new ScrollMagic.Scene({
-	  triggerElement: '#split-profile'
-	})
-	.setTween(splitProfile_tween);
+	function createScene(hash, tween, offset) {
+		return new ScrollMagic.Scene({
+		  triggerElement: hash,
+		  offset: offset
+		})
+		.addIndicators()
+		.setTween(tween)
+		.on('progress', progressHashSync);
+	}
+
+	var about_scene = createScene('#about', about_tween, -200);
+	var aspire_scene = createScene('#aspire', aspire_tween, -100);
+	var methods_scene = createScene('#methods', methods_tween, -200);
+	var agency_scene = createScene('#agency', agency_tween, -200);
+	var splitProfile_scene = createScene('#contact', splitProfile_tween, -100);
 
 /*===================================================================
 	ADD
