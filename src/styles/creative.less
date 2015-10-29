@@ -312,13 +312,20 @@ aside {
     }
 
     .info {
-        margin-top: 30px !important;
+        /*margin-top: 30px !important;*/
         .nice-transition();
+    }
+
+    .temp {
+        font-size: 40px;
+        padding: 40px 0px;
+        border-top: 2px solid #000;
+        border-bottom: 2px solid #000;
     }
 
     @media only screen and (max-width: 1200px) {
         .info {
-            margin-top: -12px !important;
+           /* margin-top: -12px !important;*/
 
             p {
                 margin-bottom: 10px !important;
@@ -329,8 +336,12 @@ aside {
     @media only screen and (max-width: 992px) {
         .info {
 
-            margin-bottom: 40px !important;
+           /* margin-bottom: 40px !important;*/
             padding-left: 20px !important;
+        }
+
+        .temp {
+            font-size: 30px;
         }
     }
 
@@ -348,6 +359,10 @@ aside {
             ul {
                 font-size: 15px;
             }
+        }
+        .temp {
+            font-size: 26px;
+            padding: 20px 0px !important;
         }
     }
 }
@@ -510,27 +525,34 @@ aside {
         }
     }
 
+    @media only screen and (max-width: 900px) {
+        background-position-x: 10%;
+    }
+
     @media only screen and (max-width: 520px) {
+        background-position-x: 20% !important;
         .info {
             padding-left: 0px !important;
 
         }
     }
+
+    .nice-transition();
 }
 
 #agency {
-    /*background: url('/images/wall_bg_dark@2X.png') repeat;
-    background-size: contain;*/
+    background: url('/images/bg5.jpg');
+    background-size: cover !important;
+    background-position-y: 30%;
+    background-repeat: no-repeat;
     color:#fff;
-    height: 100%;
+   /* height: 100%;*/
     max-height: 500px;
     background-color: #1d1e2e;
-    background-size: contain;
-    padding: 0;
-
-    -webkit-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
-    -moz-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
-    box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
+    padding: 200px 0px !important;
+        -webkit-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
+        -moz-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
+        box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
 
     .col-md-8 {
         position: relative;
@@ -556,6 +578,21 @@ aside {
             border-bottom: 2px solid #fff;
         }
     }
+
+    @media only screen and (max-width: 650px) {
+        padding: 100px 0px !important;
+
+        .section-heading {
+            font-size: 30px !important;
+        }
+    }
+   @media only screen and (max-width: 490px) {
+        padding: 80px 0px !important;
+
+        .section-heading {
+            font-size: 24px !important;
+        }
+    }
 }
 
 #contact {
@@ -568,6 +605,12 @@ footer {
     p {
         margin:10px 0px !important;
         font-size: 14px;
+    }
+    @media only screen and (max-width: 335px) {
+        .text-right, .text-left {
+            text-align: center !important;
+            float: none !important;
+        }
     }
 }
 

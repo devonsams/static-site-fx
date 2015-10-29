@@ -30,6 +30,7 @@ $( document ).ready(function() {
 				force3D:true
 			});
 			TweenMax.staggerFrom('.header-item', 1, {
+				autoAlpha: 0,
 				opacity:0, 
 				x:'-=50',
 				display:"none",
@@ -38,6 +39,7 @@ $( document ).ready(function() {
 				delay:0.1
 			}, 0.1);
 			TweenMax.from('#mainNav', 0.7, {
+				autoAlpha: 0,
 				opacity:0, 
 				y:-100,	
 				ease: Power0.easeOut,
