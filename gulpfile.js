@@ -112,6 +112,13 @@ gulp.task('build:bower_components', function() {
     .pipe(gulp.dest('dist'));
 });
 
+gulp.task('build:root_files', function() {
+  return gulp.src([
+      'src/favicon.ico'
+    ], { base: 'src' })
+    .pipe(gulp.dest('dist'));
+});
+
 gulp.task('build:clean', function () {
   return del([
     './dist/styles/app.min.css', 
@@ -253,6 +260,7 @@ gulp.task('build', gulp.series(
       'build:fonts',
       'build:videos', 
       'build:bower_components',
+      'build:root_files',
       gulp.series(
         'build:base', 
         'build:js', 
