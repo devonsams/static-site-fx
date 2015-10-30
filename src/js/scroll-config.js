@@ -1,4 +1,4 @@
-$( document ).ready(function() {
+function ScrollConfig() {
 
 	resizeDiv();
 
@@ -30,7 +30,6 @@ $( document ).ready(function() {
 				force3D:true
 			});
 			TweenMax.staggerFrom('.header-item', 1, {
-				autoAlpha: 0,
 				opacity:0, 
 				x:'-=50',
 				display:"none",
@@ -39,7 +38,6 @@ $( document ).ready(function() {
 				delay:0.1
 			}, 0.1);
 			TweenMax.from('#mainNav', 0.7, {
-				autoAlpha: 0,
 				opacity:0, 
 				y:-100,	
 				ease: Power0.easeOut,
@@ -48,8 +46,6 @@ $( document ).ready(function() {
 			});
 		}
 	});
-
-	var controller = new ScrollMagic.Controller({container: "#signatureWrapper"});
 
 /*===================================================================
 	SETUP
@@ -95,6 +91,8 @@ $( document ).ready(function() {
 	SCENES
 ====================================================================*/	
 	
+	var controller = new ScrollMagic.Controller();
+	var controller2 = new ScrollMagic.Controller();
 	var startingHash = window.location.hash ? '#' + window.location.hash : null;
 	toggleActiveNav(startingHash);
 
@@ -122,89 +120,131 @@ $( document ).ready(function() {
 	function toggleActiveNav(hash) {
 		hash = hash || '#page-top';
 		$('.page-scroll').removeClass('active');
-		$('.page-scroll[href="' + hash + '"]').addClass('active');
+		if (hash) $('.page-scroll[href="' + hash + '"]').addClass('active');
 	}
 
-	function createScene(hash, tween, offset) {
-		return new ScrollMagic.Scene({
-		  triggerElement: hash,
-		  offset: offset || 0,
-		  duration: function (e) {
-		  	if (this.triggerElement) return $(this.triggerElement()).outerHeight();
-		  	return 0
-		  }
-		})
-		.addIndicators()
-		//.setTween(tween)
-		.on('progress', progressHashSync);
+	function dynamicDuration() {
+	  	if (this.triggerElement) return $(this.triggerElement()).outerHeight();
+	  	return 0
 	}
 
-	var about_scene = createScene('#about', about_tween);
-	var aspire_scene = createScene('#aspire', aspire_tween, 50);
-	var methods_scene = createScene('#methods', methods_tween);
-	var agency_scene = createScene('#agency', agency_tween);
-	var splitProfile_scene = createScene('#contact', splitProfile_tween);
+	function createScene(options) {
+		options = options || {};
+		var scene = new ScrollMagic.Scene({
+		  triggerElement: options.hash,
+		  offset: options.offset || 0,
+		  duration: options.duration || 0
+		});
+		
+		if (options.progress) scene.on('progress', options.progress);
+		if (options.tween) scene.setTween(options.tween)
+
+		//scene.addIndicators();
+
+		return scene;
+	}
+
+	var about_scene1 = createScene({
+		hash: '#about', 
+		offset: 0, 
+		//duration: dynamicDuration,
+		progress: progressHashSync
+	});
+	var about_scene2 = createScene({
+		hash: '#about', 
+		offset: -200, 
+		duration: 0,
+		tween: about_tween
+	});
+
+	var aspire_scene1 = createScene({
+		hash: '#aspire', 
+		offset: 0, 
+		//duration: dynamicDuration,
+		progress: progressHashSync
+	});
+	var aspire_scene2 = createScene({
+		hash: '#aspire', 
+		offset: -200, 
+		duration: 0,
+		tween: aspire_tween
+	});
+
+	var methods_scene1 = createScene({
+		hash: '#methods', 
+		offset: 0, 
+		//duration: dynamicDuration,
+		progress: progressHashSync
+	});
+	var methods_scene2 = createScene({
+		hash: '#methods', 
+		offset: -200, 
+		duration: 0,
+		tween: methods_tween
+	});
+
+	var agency_scene1 = createScene({
+		hash: '#agency', 
+		offset: 0, 
+		//duration: dynamicDuration,
+		progress: progressHashSync
+	});
+	var agency_scene2 = createScene({
+		hash: '#agency', 
+		offset: -200, 
+		duration: 0,
+		tween: agency_tween
+	});
+
+	var splitProfile_scene1 = createScene({
+		hash: '#contact', 
+		offset: 0, 
+		//duration: dynamicDuration,
+		progress: progressHashSync
+	});
+	var splitProfile_scene2 = createScene({
+		hash: '#contact', 
+		offset: -200, 
+		duration: 0,
+		tween: splitProfile_tween
+	});
 
 /*===================================================================
 	ADD
 ====================================================================*/	
 
 	controller.addScene([
-	  about_scene,
-	  aspire_scene,
-	  methods_scene,
-	  agency_scene,
-	  splitProfile_scene
+	  about_scene1,
+	  aspire_scene1,
+	  methods_scene1,
+	  agency_scene1,
+	  splitProfile_scene1,
 	]);
-
-	if (isMobile()) {
-		// configure iScroll
-		var myScroll = new IScroll('#signatureWrapper', {
-			// don't scroll horizontal
-			scrollX: false,
-			// but do scroll vertical
-			scrollY: true,
-			// show scrollbars
-			scrollbars: true,
-			// deactivating -webkit-transform because pin wouldn't work because of a webkit bug: https://code.google.com/p/chromium/issues/detail?id=20574
-			// if you dont use pinning, keep "useTransform" set to true, as it is far better in terms of performance.
-			useTransform: false,
-			// deativate css-transition to force requestAnimationFrame (implicit with probeType 3)
-			useTransition: false,
-			// set to highest probing level to get scroll events even during momentum and bounce
-			// requires inclusion of iscroll-probe.js
-			probeType: 3,
-			// pass through clicks inside scroll container
-			click: true 
-		});
-				
-		// overwrite scroll position calculation to use child's offset instead of container's scrollTop();
-		controller.scrollPos(function () {
-			return -myScroll.y;
-		});
-
-		// thanks to iScroll 5 we now have a real onScroll event (with some performance drawbacks)
-		myScroll.on("scroll", function () {
-			controller.update();
-		});
-	}
-
+	/*
+	controller2.addScene([
+	  about_scene2,
+	  aspire_scene2,
+	  methods_scene2,
+	  agency_scene2,
+	  splitProfile_scene2
+	]);
+	*/
+	
 	// change behaviour of controller to animate scroll instead of jump
 	controller.scrollTo(function (newpos) {
-		TweenMax.to("#signatureWrapper", 0.5, {scrollTo: {y: newpos}});
+		TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
 	});
-
+	
 	//  bind scroll to anchor links
 	$(document).on("click", "a[href^='#']", function (e) {
 		var id = $(this).attr("href");
-		var newPos = $(id).offset().top + $("#signatureWrapper").scrollTop();
 		if ($(id).length > 0) {
 			e.preventDefault();
 
 			// trigger scroll
-			controller.scrollTo(newPos);
-
-				// if supported by the browser we can even update the URL.
+			controller.scrollTo(id);
+			
+			// if supported by the browser we can even update the URL.
 			if (window.history && window.history.pushState) {
 				history.pushState("", document.title, id);
 			}

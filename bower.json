@@ -17,7 +17,8 @@
     "font-awesome": ">=4.1.0",
     "gsap": "greensock/GreenSock-JS",
     "scrollmagic": "~2.0.5",
-    "queryloader2": "~3.0.15"
+    "queryloader2": "~3.0.15",
+    "iscroll": "~5.1.3"
   },
   "overrides": {
     "gsap": {
@@ -31,6 +32,12 @@
         "scrollmagic/uncompressed/ScrollMagic.js",
         "scrollmagic/uncompressed/plugins/animation.gsap.js",
         "scrollmagic/uncompressed/plugins/debug.addIndicators.js"
+      ]
+    },
+    "iscroll": {
+      "main": [
+        "build/iscroll.js",
+        "build/iscroll-probe.js"
       ]
     }
   }
