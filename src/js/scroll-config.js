@@ -1,4 +1,4 @@
-function ScrollConfig() {
+function scrollConfig() {
 
 	resizeDiv();
 
@@ -91,8 +91,8 @@ function ScrollConfig() {
 	SCENES
 ====================================================================*/	
 	
-	var controller = new ScrollMagic.Controller();
-	var controller2 = new ScrollMagic.Controller();
+	var navController = new ScrollMagic.Controller();
+	var animationController = new ScrollMagic.Controller();
 	var startingHash = window.location.hash ? '#' + window.location.hash : null;
 	toggleActiveNav(startingHash);
 
@@ -213,41 +213,81 @@ function ScrollConfig() {
 	ADD
 ====================================================================*/	
 
-	controller.addScene([
+	navController.addScene([
 	  about_scene1,
 	  aspire_scene1,
 	  methods_scene1,
 	  agency_scene1,
 	  splitProfile_scene1,
 	]);
-	/*
-	controller2.addScene([
+	
+	animationController.addScene([
 	  about_scene2,
 	  aspire_scene2,
 	  methods_scene2,
 	  agency_scene2,
 	  splitProfile_scene2
 	]);
-	*/
+	
+
+	if (isMobile()) {
+		// configure iScroll
+		var myScroll = new IScroll('#signatureWrapper', {
+			// don't scroll horizontal
+			scrollX: false,
+			// but do scroll vertical
+			scrollY: true,
+			// show scrollbars
+			scrollbars: false,
+			// deactivating -webkit-transform because pin wouldn't work because of a webkit bug: https://code.google.com/p/chromium/issues/detail?id=20574
+			// if you dont use pinning, keep "useTransform" set to true, as it is far better in terms of performance.
+			useTransform: true,
+			// deativate css-transition to force requestAnimationFrame (implicit with probeType 3)
+			useTransition: true,
+			// set to highest probing level to get scroll events even during momentum and bounce
+			// requires inclusion of iscroll-probe.js
+			probeType: 3,
+			// pass through clicks inside scroll container
+			click: true 
+		});
+				
+		// overwrite scroll position calculation to use child's offset instead of container's scrollTop();
+		controller.scrollPos(function () {
+			return -myScroll.y;
+		});
+
+		// thanks to iScroll 5 we now have a real onScroll event (with some performance drawbacks)
+		myScroll.on("scroll", function () {
+			controller.update();
+		});
+	}
 	
 	// change behaviour of controller to animate scroll instead of jump
-	controller.scrollTo(function (newpos) {
-		TweenMax.to(window, 0.5, {scrollTo: {y: newpos}});
+	navController.scrollTo(function (newpos) {
+		TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
 	});
 	
 	//  bind scroll to anchor links
 	$(document).on("click", "a[href^='#']", function (e) {
 		var id = $(this).attr("href");
-		if ($(id).length > 0) {
+		if (id) {
 			e.preventDefault();
-
-			// trigger scroll
-			controller.scrollTo(id);
-			
-			// if supported by the browser we can even update the URL.
-			if (window.history && window.history.pushState) {
-				history.pushState("", document.title, id);
-			}
+			goToScene(id);
 		}
 	});
-});
+
+	function goToScene(id) {
+		if (!id || !$(id).length) return;
+
+		var newPos = $(id).offset().top + $("#signatureWrapper").scrollTop();
+		newPos = (id === '#page-top' ? 0 : newPos);
+		
+		// trigger scroll
+		navController.scrollTo(newPos);
+
+			// if supported by the browser we can even update the URL.
+		if (window.history && window.history.pushState) {
+			history.pushState("", document.title, id);
+		}
+	}
+}
