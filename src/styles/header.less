@@ -212,7 +212,7 @@ header {
     @media only screen and (max-width: 390px) {
         #coffee {
             max-width: 120px;
-            bottom: 350px;
+            left: 10px;
             -webkit-transform: translateY(-200px) !important;
             -ms-transform: translateY(-200px) !important;
             transform: translateY(-200px) !important;
@@ -220,7 +220,21 @@ header {
         #notebook {
             top:300px;
             max-width: 300px;
-            left: 35px;
+            left: 90px;
+            -webkit-transform: translate(0,0)  !important;
+            -ms-transform: translate(0,0)  !important;
+            transform: translate(0,0)  !important;
+        }
+    }
+
+    @media only screen and (max-width: 320px) {
+        #coffee {
+            max-width: 100px;
+        }
+        #notebook {
+            top:300px;
+            max-width: 250px;
+            left: 70px;
             -webkit-transform: translate(0,0)  !important;
             -ms-transform: translate(0,0)  !important;
             transform: translate(0,0)  !important;
@@ -229,21 +243,18 @@ header {
 
     /* HEIGHT */
 
-    @media only screen and (max-height: 720px) {
-        #coffee {
-            bottom: 350px;
-            -webkit-transform: translateY(-200px) !important;
-            -ms-transform: translateY(-200px) !important;
-            transform: translateY(-200px) !important;
-        }
+    @media only screen and (max-height: 740px) {
         #notebook {
-            top:270px;
+            top:370px;
         }
         #ipad {
             top:-70px;
         }
         #growth {
             top: 180px;
+        }
+        #coffee {
+            top: 550px;
         }
     }
 
@@ -264,24 +275,35 @@ header {
             transform: translateX(-50%)  !important;
             padding: 20px;
         }
+        #notebook {
+            top:290px;
+        }
     }
 
-    @media (max-width:390) and (max-height: 720px) {
+    @media only screen and (max-height: 500px) {
+        #coffee {
+            top: 550px;
+        }
+        #notebook {
+            top:250px;
+        }
+    }
+
+    /*@media (max-width:390) and (max-height: 720px) {
         #coffee {
             max-width: 120px;
-            bottom: 350px;
+            top: 550px;
             -webkit-transform: translateY(-200px) !important;
             -ms-transform: translateY(-200px) !important;
             transform: translateY(-200px) !important;
         }
         #notebook {
-            top:270px !important;
+            top:370px !important;
             max-width: 240px !important;
             left: 80px !important;
             -webkit-transform: translate(0,0)  !important;
             -ms-transform: translate(0,0)  !important;
             transform: translate(0,0)  !important;
         }
-    }
-
+    }*/
 }
