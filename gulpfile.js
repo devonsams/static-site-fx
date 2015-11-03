@@ -21,6 +21,25 @@ var watch = require('gulp-watch');
 var merge = require('merge-stream');
 var awspublish = require('gulp-awspublish');
 var awsCredentials = require('./aws-credentials.json');
+var modernizr = require('modernizr');
+var modernizrConfig = require('./modernizr-config.json');
+var streamFromPromise = require('stream-from-promise');
+var source = require('vinyl-source-stream')
+
+function buildModernizr(config) {
+  return new Promise(function(resolve, reject) {
+    modernizr.build(config, function(result) {
+      if (!result) reject("The provided config results in an empty build.");
+      resolve(result);
+    });
+  });
+}
+
+gulp.task('modernizr', function() {
+  return streamFromPromise(buildModernizr(modernizrConfig))
+    .pipe(source('modernizr.js'))
+    .pipe(gulp.dest("src/js"));
+});
 
 gulp.task('build:base', function () {
   var assets = useref.assets({
@@ -254,6 +273,7 @@ gulp.task('compile', gulp.parallel('compile:html', 'compile:less'));
 
 gulp.task('build', gulp.series(
     'clean',
+    'modernizr',
     'inject',
     'compile',
     gulp.parallel(
@@ -273,6 +293,7 @@ gulp.task('build', gulp.series(
 ));
 
 gulp.task('default', gulp.series(
+  'modernizr',
   'inject',
   'compile',
   gulp.parallel(
