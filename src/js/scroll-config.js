@@ -120,7 +120,7 @@ function scrollConfig() {
 	function toggleActiveNav(hash) {
 		hash = hash || '#page-top';
 		$('.page-scroll').removeClass('active');
-		if (hash) $('.page-scroll[href="' + hash + '"]').addClass('active');
+		$('.page-scroll[href="' + hash + '"]').addClass('active');
 	}
 
 	function dynamicDuration() {
@@ -252,13 +252,13 @@ function scrollConfig() {
 		});
 				
 		// overwrite scroll position calculation to use child's offset instead of container's scrollTop();
-		controller.scrollPos(function () {
+		navController.scrollPos(function () {
 			return -myScroll.y;
 		});
 
 		// thanks to iScroll 5 we now have a real onScroll event (with some performance drawbacks)
 		myScroll.on("scroll", function () {
-			controller.update();
+			navController.update();
 		});
 	}
 	
