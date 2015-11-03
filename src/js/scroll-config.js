@@ -29,20 +29,32 @@ function scrollConfig() {
 				ease: Power0.easeOut, 
 				force3D:true
 			});
-			TweenMax.staggerFrom('.header-item', 1, {
-				opacity:0, 
+
+			TweenMax.staggerFromTo('.header-item', 1, 
+			{
+				autoAlpha:0,
 				x:'-=50',
-				display:"none",
-				ease: Power4.easeInOut,
 				force3D: true,
-				delay:0.1
+			},
+			{
+			 	autoAlpha:1,
+			 	display: "inline-block",
+			 	ease: Power4.easeInOut,
+			 	x:0,
+			 	force3D: true,
+			 	delay:0.2
 			}, 0.1);
-			TweenMax.from('#mainNav', 0.7, {
-				opacity:0, 
+			TweenMax.fromTo('#mainNav', 0.7, 
+			{
+				autoAlpha:0, 
 				y:-100,	
+			},
+			{
+				autoAlpha:1,
+				y:0,
 				ease: Power0.easeOut,
-				display:"none",
-				delay: 1
+				display:"block",
+				delay: 0.4
 			});
 		}
 	});

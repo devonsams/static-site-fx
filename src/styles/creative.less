@@ -40,15 +40,12 @@ div#qLtempOverlay {
 
    .nice-transition();
 
-    @keyframes loadinglogo {
-        from {max-width: 650px; opacity: 0.5;}
-        to {max-width: 500px; opacity: 1;}
-    }
+
 
    .loading-logo {
-        max-width: 500px;
+        max-width: 400px;
         opacity:1;
-        width:90%;
+        width:70%;
         animation-name: loadinglogo;
         animation-duration: 2s;
         padding: 20px;
@@ -59,6 +56,10 @@ div#qLtempOverlay {
         -o-transform:      translateY(-50px);
         transform:         translateY(-50px);
 
+        @keyframes loadinglogo {
+            from {max-width: 650px; opacity: 0;}
+            to {max-width: 400px; opacity: 1;}
+        }
    }
 }
 
@@ -125,7 +126,7 @@ aside {
 // Navigation
 
 #mainNav {
-    display: block;
+    display: none;
     .container-fluid {
          max-width: 1300px;
     }
@@ -157,8 +158,38 @@ aside {
             margin-top: -7px;
         }
     }
+    
+    .social-nav {
+        display: none;
+
+        li {
+            display: inline-block;
+        }
+
+        .nice-transition();
+    }
+
+    @media only screen and (max-width: 840px) {
+        .full-nav {
+            display: none !important;
+        }
+
+        .social-nav {
+            display: block;
+        }
+    }
+    @media only screen and (max-width: 767px) {
+        .social-nav {
+            float: right;
+            margin-top: -49px;
+        }
+    }
+
+
+
 
     .nav {
+        padding-right: 20px;
         li {
             a.social-icons, a.social-icons:focus {
                 font-size: 12px !important;
