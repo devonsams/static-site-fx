@@ -326,7 +326,7 @@ aside {
         border: 2px solid @dark-color;
         color: @dark-color;
 
-        &:hover {
+        &:hover, &:focus, &:active {
             color: #fff;
             background-color: @dark-color;
         }
@@ -624,7 +624,22 @@ aside {
         .methods-slide-1 {
             background: url('/images/features-1.jpg') no-repeat top left;
             height: 100vh;
-        }
+
+            .text-left {
+                padding-left: 30px;
+                
+                .section-heading {
+                    font-size: 34px;
+                    margin:0;
+                    line-height: 1.4em;
+                }
+
+                .btn {
+                    margin-left:0px;
+                    margin-top: 30px;
+                }
+            }
+        }/* methods-slide-1 */
         .methods-slide-2 {
             background: url('/images/wall_bg.jpg') repeat;
             background-size: contain;
@@ -647,46 +662,26 @@ aside {
                     margin:0;
                 }
             }
-        }
-    }
-
-    .container-fluid {
-      /*  padding-left: 30px;
-        padding-right: 30px;*/
-
-        .info {
-            padding-left: 70px;
-
-            .section-heading {
-                font-size: 34px;
-                margin:0;
-                line-height: 1.4em;
-
-                span {
-                    border-bottom: 2px solid @dark-color;
-                }
-            }
-
-            .btn {
-                margin-left:0px;
-            }
-        }
-    }
+        }/* methods-slide-2 */
+    }/* sliderWrapper */
 
     @media only screen and (max-width: 900px) {
-        background-position-x: 10%;
+        .sliderWrapper .methods-slide-1{
+            background-position-x: 10%;
+        } 
     }
 
     @media only screen and (max-width: 520px) {
-        background-position-x: 20% !important;
-        .info {
-            padding-left: 0px !important;
-
-        }
+        .sliderWrapper .methods-slide-1{
+            background-position-x: 20% !important;
+            .text-left {
+                padding-left: 0px;
+            }  
+        } 
     }
 
     .nice-transition();
-}
+}/* #methods */
 
 #agency {
     background: url('/images/bg5.jpg');
