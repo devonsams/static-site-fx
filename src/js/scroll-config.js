@@ -107,13 +107,35 @@ function scrollConfig() {
 	var animationController = new ScrollMagic.Controller();
 	var startingHash = window.location.hash ? '#' + window.location.hash : null;
 	toggleActiveNav(startingHash);
-
+	/*
 	function progressHashSync(e) {
 		var target = $(e.target.triggerElement());
 		var nextScene = e.progress ? target : target.prev('section');
 		var hash = nextScene.length ? '#' + nextScene.attr('id') : null
 		updateHash(hash);
 		toggleActiveNav(hash);
+	}
+	
+	*/
+
+	watcher('#header');
+	watcher("#about");
+	watcher("#aspire");
+	watcher("#methods");
+	watcher("#agency");
+	watcher("#contact");
+
+	function watcher(selector) {
+		$(selector)
+			.inview({ offsetTop: 200, offsetBottom: -200 })
+			.on('scrolledin', function () { 
+				updateHash(selector);
+				toggleActiveNav(selector);
+			})
+			/*
+			.on('scrolledout', function () { 
+				console.log( 'out '+$(this).text() ); 
+			})*/;
 	}
 
 	function updateHash(hash) {
@@ -160,7 +182,7 @@ function scrollConfig() {
 		hash: '#about', 
 		offset: 0, 
 		//duration: dynamicDuration,
-		progress: progressHashSync
+		//progress: progressHashSync
 	});
 	var about_scene2 = createScene({
 		hash: '#about', 
@@ -173,7 +195,7 @@ function scrollConfig() {
 		hash: '#aspire', 
 		offset: 0, 
 		//duration: dynamicDuration,
-		progress: progressHashSync
+		//progress: progressHashSync
 	});
 	var aspire_scene2 = createScene({
 		hash: '#aspire', 
@@ -186,7 +208,7 @@ function scrollConfig() {
 		hash: '#methods', 
 		offset: 0, 
 		//duration: dynamicDuration,
-		progress: progressHashSync
+		//progress: progressHashSync
 	});
 	var methods_scene2 = createScene({
 		hash: '#methods', 
@@ -199,7 +221,7 @@ function scrollConfig() {
 		hash: '#agency', 
 		offset: 0, 
 		//duration: dynamicDuration,
-		progress: progressHashSync
+		//progress: progressHashSync
 	});
 	var agency_scene2 = createScene({
 		hash: '#agency', 
@@ -212,7 +234,7 @@ function scrollConfig() {
 		hash: '#contact', 
 		offset: 0, 
 		//duration: dynamicDuration,
-		progress: progressHashSync
+		//progress: progressHashSync
 	});
 	var splitProfile_scene2 = createScene({
 		hash: '#contact', 
@@ -276,7 +298,8 @@ function scrollConfig() {
 	
 	// change behaviour of controller to animate scroll instead of jump
 	navController.scrollTo(function (newpos) {
-		TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
+		//TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
+		$('div').inview('scrollTo', newpos);
 	});
 	
 	//  bind scroll to anchor links
@@ -284,6 +307,7 @@ function scrollConfig() {
 		var id = $(this).attr("href");
 		if (id) {
 			e.preventDefault();
+			toggleActiveNav(id);
 			goToScene(id);
 		}
 	});
@@ -292,7 +316,7 @@ function scrollConfig() {
 		if (!id || !$(id).length) return;
 
 		var newPos = $(id).offset().top + $("#signatureWrapper").scrollTop();
-		newPos = (id === '#page-top' ? 0 : newPos);
+		newPos = (id === '#header' ? 0 : newPos);
 		
 		// trigger scroll
 		navController.scrollTo(newPos);
@@ -301,5 +325,14 @@ function scrollConfig() {
 		if (window.history && window.history.pushState) {
 			history.pushState("", document.title, id);
 		}
+	}
+
+	var startingHash = window.location.hash;
+
+	if (startingHash) {
+		toggleActiveNav(startingHash);
+		goToScene(startingHash)
+	} else {
+		toggleActiveNav('#header');
 	}
 }

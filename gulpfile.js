@@ -12,7 +12,6 @@ var rev = require('gulp-rev');
 var revReplace = require('gulp-rev-replace');
 var useref = require('gulp-useref');
 var gulpif = require('gulp-if');
-var md5 = require("gulp-md5-assets");
 var imagemin = require('gulp-imagemin');
 var del = require('del');
 var wiredep = require('wiredep').stream;
