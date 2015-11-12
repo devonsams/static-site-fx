@@ -16,7 +16,7 @@
         setDirection( e );
         checkInView( e );
         _buffer = null;
-      }, 300);
+      }, 400);
     }
   }
 
@@ -131,7 +131,7 @@
   var methods = {
     scrollTo: function(newPos) {
       _disabled = true;
-      TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newPos}, onComplete: function() {
+      TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newPos === 0 ? newPos : newPos - 50}, onComplete: function() {
         //onComplete fires a little early, so adding a little buffer
         setTimeout(function() {
           _disabled = false;
