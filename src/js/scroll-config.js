@@ -127,7 +127,7 @@ function scrollConfig() {
 
 	function watcher(selector) {
 		$(selector)
-			.inview({ offsetTop: 200, offsetBottom: -200 })
+			.inview({ offsetTop: 450, offsetBottom: -200 })
 			.on('scrolledin', function () { 
 				updateHash(selector);
 				toggleActiveNav(selector);
