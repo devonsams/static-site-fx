@@ -10,6 +10,8 @@ function scrollConfig() {
 		vpw = $(window).width();
 		vph = $(window).height();
 		$("#loading").css({"min-height": vph + "px"});
+		$(".slide").css({"width": vpw + "px"});
+		$(".slide-2").css({"right": "-" + vpw + "px"});
 	}
 	
 	$("body").queryLoader2({

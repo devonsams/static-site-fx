@@ -424,10 +424,11 @@ aside {
 }
 
 .sliderCtrl {
-    position: relative;
+    position: absolute;
     left: 50px;
     top:50px;
     margin:0;
+    z-index: 10;
 
     li {
         list-style: none;
@@ -459,23 +460,21 @@ aside {
 
 .sliderWrapper {
     padding: 100px 0;
-   /* position: relative;
-    width: 100%;
+    position: relative;
+    overflow: hidden;
+    width:100%;
+    min-height: 100vh;
 
     .slide {
-        position: relative;
-        width:100%;
+        position: absolute;
         float: left;
-
-        &.slide-2 {
-            left:70%;
-        }
-    }*/
+    }
 }
 
 #aspire {
     background-image: url('/images/bg3.jpg');
     color:#fff;
+    position: relative;
 
     -webkit-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
     -moz-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
@@ -714,6 +713,7 @@ aside {
 #methods {
     /*height:100%;
     min-height: 100%;*/
+    position: relative;
 
     -webkit-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
     -moz-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
@@ -814,7 +814,6 @@ aside {
             }
         }
         .sliderCtrl {
-            position: relative;
             left: -10px;
         }
         .sliderWrapper .methods-slide-1{
@@ -835,6 +834,7 @@ aside {
 }/* #methods */
 
 #agency {
+    position: relative;
     background: url('/images/bg5.jpg');
     background-size: cover !important;
     background-position-y: 30%;
@@ -860,21 +860,32 @@ aside {
     }
 
     .sliderWrapper {
+        height: 100%;
         padding: 0;
-        top: 50%;
-        position: relative;
-
-        -webkit-transform: translateY(-50%);
-        -moz-transform:    translateY(-50%);
-        -ms-transform:     translateY(-50%);
-        -o-transform:      translateY(-50%);
-        transform:         translateY(-50%);
+        min-height: 460px;
 
         .section-heading {
             font-size: 40px;
         }
 
+        .slide {
+            top: 50%;
+            position: relative;
+            -webkit-transform: translateY(-50%);
+            -moz-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            -o-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+
         .agency-slide-2 {
+            position: absolute;
+
+            .row {
+                margin-right:0;
+                padding-right: 20px;
+            }
+
             .text-center {
                 padding: 70px 20px;
                 background-color: rgba(0,0,0,0.4);
@@ -911,6 +922,7 @@ aside {
 footer {
     background-color: #1f1e2d;
     color:#fff;
+    .linear-gradient-dark-bg();
     p {
         margin:10px 0px !important;
         font-size: 14px;
