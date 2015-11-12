@@ -279,17 +279,19 @@ function scrollConfig() {
 		// trigger scroll
 		animationController.scrollTo(newPos);
 
-			// if supported by the browser we can even update the URL.
+		// if supported by the browser we can even update the URL.
 		if (window.history && window.history.pushState) {
 			history.pushState("", document.title, id);
 		}
 	}
 
 	var startingHash = window.location.hash;
+	var splitHash = startingHash.split('/');
 
 	if (startingHash) {
-		toggleActiveNav(startingHash);
-		goToScene(startingHash)
+		var hashington = splitHash.length > 1 ? splitHash[0] : startingHash;
+		toggleActiveNav(hashington);
+		goToScene(hashington)
 	} else {
 		toggleActiveNav('#header');
 	}

@@ -102,7 +102,6 @@
         break;
       }
     }
-    console.log( _watch );
   }
 
   var pluginName = 'inview';
