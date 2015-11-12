@@ -30,21 +30,6 @@
      _lastScrollTop = st;
   }
 
-  /*
-  when you enter it either from the top or the bottom
-  on menu click
-  need to be able to change url hash and active nav
-  then trigger scroll (without triggering the 
-  scrolledin and scrolledout events)
-
-  scrolling down
-  $('#signatureWrapper').scrollTop() + $(window).height() > $('#about').position().top + 200
-
-  scrolling up
-  $('#signatureWrapper').scrollTop() < $('#about').position().top + $('#about').outerHeight() - 200
-
-  */
-
   function Tester() {
     this.lastTop = undefined;
     this.lastBottom = undefined;
@@ -131,7 +116,7 @@
   var methods = {
     scrollTo: function(newPos) {
       _disabled = true;
-      TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newPos === 0 ? newPos : newPos - 50}, onComplete: function() {
+      TweenMax.to($container, 0.5, {scrollTo: {y: newPos === 0 ? newPos : newPos - 50}, onComplete: function() {
         //onComplete fires a little early, so adding a little buffer
         setTimeout(function() {
           _disabled = false;
