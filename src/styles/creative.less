@@ -326,7 +326,7 @@ aside {
         border: 2px solid @dark-color;
         color: @dark-color;
 
-        &:hover {
+        &:hover, &:focus, &:active {
             color: #fff;
             background-color: @dark-color;
         }
@@ -346,29 +346,29 @@ aside {
     -moz-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
     box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
 
+    h2 {
+        margin-bottom: 20px;
+    }
+
+    p {
+        margin-bottom: 10px;
+    }
+
     .video {
         max-width:560px; 
         width:100%;
 
         .nice-transition();
-        
     }
 
     .info {
-        /*margin-top: 30px !important;*/
+        margin-top: 30px !important;
         .nice-transition();
-    }
-
-    .temp {
-        font-size: 40px;
-        padding: 40px 0px;
-        border-top: 2px solid #000;
-        border-bottom: 2px solid #000;
     }
 
     @media only screen and (max-width: 1200px) {
         .info {
-           /* margin-top: -12px !important;*/
+           margin-top: -20px !important;
 
             p {
                 margin-bottom: 10px !important;
@@ -379,12 +379,8 @@ aside {
     @media only screen and (max-width: 992px) {
         .info {
 
-           /* margin-bottom: 40px !important;*/
+            margin-bottom: 40px !important;
             padding-left: 20px !important;
-        }
-
-        .temp {
-            font-size: 30px;
         }
     }
 
@@ -403,11 +399,49 @@ aside {
                 font-size: 15px;
             }
         }
-        .temp {
-            font-size: 26px;
-            padding: 20px 0px !important;
+    }
+}
+
+#aspire, #methods {
+    padding: 0px;
+}
+
+.sliderCtrl {
+    position: relative;
+    left: 50px;
+    top:50px;
+    margin:0;
+
+    li {
+        list-style: none;
+        float: left;
+        margin-right: 15px;
+
+        a {
+            list-style: none;
+            cursor: pointer;
+            width: 2px;
+            height: 2px;
+            border: 2px solid #fff;
+            padding: 3px;
+            overflow: hidden;
+            display: block;
+            -webkit-transform: rotate(45deg);
+            -moz-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            -o-transform: rotate(45deg);
+            transform: rotate(45deg);
+
+            &.active {
+                background-color: #fff;
+                opacity: 1;
+            }
         }
     }
+}/* .sliderCtrl */
+
+.sliderWrapper {
+    padding: 100px 0;
 }
 
 #aspire {
@@ -418,6 +452,9 @@ aside {
     -moz-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
     box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
 
+    .hide {
+        display: none;
+    }
     .info {
         padding-left: 70px;
         h1 {
@@ -431,6 +468,19 @@ aside {
         .btn {
             margin-top:50px;
             margin-left:10px;
+        }
+
+        .sub-text {
+            margin-left: 20px;
+            margin-top: 40px;
+
+            p {
+                margin:0;
+                padding: 0;
+                font-size: 18px;
+                margin-top: 10px;
+                margin-bottom: 10px;
+            }
         }
     }
 
@@ -525,64 +575,105 @@ aside {
 
 
 
-    .info {
-        padding-left: 70px;
-        h1 {
-            font-size: 70px;
-        }
-
-        .btn {
-            margin-top:50px;
-            margin-left:10px;
-        }
+.info {
+    padding-left: 70px;
+    h1 {
+        font-size: 70px;
     }
 
+    .btn {
+        margin-top:50px;
+        margin-left:10px;
+    }
+}
+
 #methods {
-    background: url('/images/features-1.jpg') no-repeat top left;
-    height:100vh;
-    min-height: 100%;
+    /*height:100%;
+    min-height: 100%;*/
 
     -webkit-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
     -moz-box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
     box-shadow: 0px -10px 15px -4px rgba(0,0,0,0.36);
 
-    .container-fluid {
-        padding-left: 30px;
-        padding-right: 30px;
+    .sliderCtrl {
+        li {
+            a {
+                border-color: @dark-color;
 
-        .info {
-            padding-left: 70px;
-
-            .section-heading {
-                font-size: 34px;
-                margin:0;
-                line-height: 1.4em;
-
-                span {
-                    border-bottom: 2px solid @dark-color;
+                &.active {
+                    background-color: @dark-color;
                 }
             }
-
-            .btn {
-                margin-left:0px;
-            }
         }
-    }
+    }/* .sliderCtrl */
+
+    .sliderWrapper {
+        padding: 0px;
+        height: 100%;
+        .container-fluid {
+            padding: 100px 70px;
+        }
+        .methods-slide-1 {
+            background: url('/images/features-1.jpg') no-repeat top left;
+            height: 100vh;
+
+            .text-left {
+                padding-left: 30px;
+                
+                .section-heading {
+                    font-size: 34px;
+                    margin:0;
+                    line-height: 1.4em;
+                }
+
+                .btn {
+                    margin-left:0px;
+                    margin-top: 30px;
+                }
+            }
+        }/* methods-slide-1 */
+        .methods-slide-2 {
+            background: url('/images/wall_bg.jpg') repeat;
+            background-size: contain;
+            height: 100%;
+
+            .box {
+                background-color: @dark-color;
+                color: #fff;
+                padding: 15px;
+                margin:5px;
+
+                h1 {
+                    font-size: 22px;
+                    margin:0 0 10px 0;
+                }
+
+                p {
+                    font-size: 16px;
+                    line-height: 20px;
+                    margin:0;
+                }
+            }
+        }/* methods-slide-2 */
+    }/* sliderWrapper */
 
     @media only screen and (max-width: 900px) {
-        background-position-x: 10%;
+        .sliderWrapper .methods-slide-1{
+            background-position-x: 10%;
+        } 
     }
 
     @media only screen and (max-width: 520px) {
-        background-position-x: 20% !important;
-        .info {
-            padding-left: 0px !important;
-
-        }
+        .sliderWrapper .methods-slide-1{
+            background-position-x: 20% !important;
+            .text-left {
+                padding-left: 0px;
+            }  
+        } 
     }
 
     .nice-transition();
-}
+}/* #methods */
 
 #agency {
     background: url('/images/bg5.jpg');
@@ -590,36 +681,48 @@ aside {
     background-position-y: 30%;
     background-repeat: no-repeat;
     color:#fff;
-   /* height: 100%;*/
-    max-height: 500px;
+    height: 500px;
     background-color: #1d1e2e;
-    padding: 200px 0px !important;
+    padding:20px !important;
         -webkit-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
         -moz-box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
         box-shadow: inset 0px 10px 15px -4px rgba(0,0,0,0.36);
 
-    .col-md-8 {
+    .sliderCtrl {
+        top: 440px;
+        width: 100px;
+        left: 50%;
+        
+        -webkit-transform: translateX(-50%);
+        -moz-transform:    translateX(-50%);
+        -ms-transform:     translateX(-50%);
+        -o-transform:      translateX(-50%);
+        transform:         translateX(-50%);
+    }
+
+    .sliderWrapper {
+        padding: 0;
+        top: 50%;
         position: relative;
-        -webkit-transform: translateY(80%) !important;
-        -ms-transform: translateY(80%) !important;
-        transform: translateY(80%) !important;
-    }
 
-    .col-md-4 {
-        margin-left: -15px;
-        img {
-            width: 100%;
-            max-height: 700px;
-            max-height: 500px;
-            position: relative;
+        -webkit-transform: translateY(-50%);
+        -moz-transform:    translateY(-50%);
+        -ms-transform:     translateY(-50%);
+        -o-transform:      translateY(-50%);
+        transform:         translateY(-50%);
+
+        .section-heading {
+            font-size: 40px;
         }
-    }
 
-    .section-heading {
-        font-size: 40px;
-
-        span {
-            border-bottom: 2px solid #fff;
+        .agency-slide-2 {
+            .text-center {
+                padding: 70px 20px;
+                background-color: rgba(0,0,0,0.4);
+                p {
+                    font-size: 18px;
+                }
+            }
         }
     }
 
