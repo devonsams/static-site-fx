@@ -384,6 +384,20 @@ aside {
         }
     }
 
+    @media only screen and (max-width: 850px) {
+        .container {
+            padding-left: 70px;
+            padding-right: 70px;
+        }
+    }
+
+    @media only screen and (max-width: 520px) {
+        .container {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    }
+
     @media only screen and (max-width: 400px) {
         .info {
             h2 {
@@ -541,8 +555,12 @@ aside {
         }
 
         .info {
-            padding-left: 0px !important;
+            padding-left: 10px !important;
+        }
 
+        .sliderCtrl {
+            position: relative;
+            left: -10px;
         }
     }
 
@@ -664,6 +682,20 @@ aside {
     }
 
     @media only screen and (max-width: 520px) {
+        .container-fluid {
+            padding-left: 15px !important;
+            padding-right: 15px !important;
+
+            .row {
+                margin:0;
+                padding-left: 10px;
+                padding-right: 10px;
+            }
+        }
+        .sliderCtrl {
+            position: relative;
+            left: -10px;
+        }
         .sliderWrapper .methods-slide-1{
             background-position-x: 20% !important;
             .text-left {
