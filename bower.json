@@ -19,7 +19,7 @@
     "scrollmagic": "~2.0.5",
     "queryloader2": "~3.0.15",
     "iscroll": "~5.1.3",
-    "hammerjs": "~2.0.4"
+    "Looper.js": "looper#~1.1.6"
   },
   "overrides": {
     "gsap": {
@@ -41,5 +41,8 @@
         "build/iscroll-probe.js"
       ]
     }
+  },
+  "resolutions": {
+    "jquery": "~2.1.4"
   }
 }

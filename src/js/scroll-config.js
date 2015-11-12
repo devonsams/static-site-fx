@@ -129,15 +129,11 @@ function scrollConfig() {
 
 	function watcher(selector) {
 		$(selector)
-			.inview({ offsetTop: 450, offsetBottom: -200 })
+			.inview({ offsetTop: 200, offsetBottom: -200 })
 			.on('scrolledin', function () { 
 				updateHash(selector);
 				toggleActiveNav(selector);
-			})
-			/*
-			.on('scrolledout', function () { 
-				console.log( 'out '+$(this).text() ); 
-			})*/;
+			});
 	}
 
 	function updateHash(hash) {
@@ -159,11 +155,6 @@ function scrollConfig() {
 		$('.page-scroll[href="' + hash + '"]').addClass('active');
 	}
 
-	function dynamicDuration() {
-	  	if (this.triggerElement) return $(this.triggerElement()).outerHeight();
-	  	return 0
-	}
-
 	function createScene(options) {
 		options = options || {};
 		var scene = new ScrollMagic.Scene({
@@ -180,65 +171,40 @@ function scrollConfig() {
 		return scene;
 	}
 
-	var about_scene1 = createScene({
-		hash: '#about', 
-		offset: 0, 
-		//duration: dynamicDuration,
-		//progress: progressHashSync
-	});
-	var about_scene2 = createScene({
+
+	var about_scene = createScene({
 		hash: '#about', 
 		offset: -200, 
 		duration: 0,
 		tween: about_tween
 	});
 
-	var aspire_scene1 = createScene({
-		hash: '#aspire', 
-		offset: 0, 
-		//duration: dynamicDuration,
-		//progress: progressHashSync
-	});
-	var aspire_scene2 = createScene({
+
+	var aspire_scene = createScene({
 		hash: '#aspire', 
 		offset: -200, 
 		duration: 0,
 		tween: aspire_tween
 	});
 
-	var methods_scene1 = createScene({
-		hash: '#methods', 
-		offset: 0, 
-		//duration: dynamicDuration,
-		//progress: progressHashSync
-	});
-	var methods_scene2 = createScene({
+
+	var methods_scene = createScene({
 		hash: '#methods', 
 		offset: -200, 
 		duration: 0,
 		tween: methods_tween
 	});
 
-	var agency_scene1 = createScene({
-		hash: '#agency', 
-		offset: 0, 
-		//duration: dynamicDuration,
-		//progress: progressHashSync
-	});
-	var agency_scene2 = createScene({
+
+	var agency_scene = createScene({
 		hash: '#agency', 
 		offset: -200, 
 		duration: 0,
 		tween: agency_tween
 	});
 
-	var splitProfile_scene1 = createScene({
-		hash: '#contact', 
-		offset: 0, 
-		//duration: dynamicDuration,
-		//progress: progressHashSync
-	});
-	var splitProfile_scene2 = createScene({
+
+	var splitProfile_scene = createScene({
 		hash: '#contact', 
 		offset: -200, 
 		duration: 0,
@@ -249,20 +215,12 @@ function scrollConfig() {
 	ADD
 ====================================================================*/	
 
-	navController.addScene([
-	  about_scene1,
-	  aspire_scene1,
-	  methods_scene1,
-	  agency_scene1,
-	  splitProfile_scene1,
-	]);
-	
 	animationController.addScene([
-	  about_scene2,
-	  aspire_scene2,
-	  methods_scene2,
-	  agency_scene2,
-	  splitProfile_scene2
+	  about_scene,
+	  aspire_scene,
+	  methods_scene,
+	  agency_scene,
+	  splitProfile_scene
 	]);
 	
 
@@ -288,18 +246,18 @@ function scrollConfig() {
 		});
 				
 		// overwrite scroll position calculation to use child's offset instead of container's scrollTop();
-		navController.scrollPos(function () {
+		animationController.scrollPos(function () {
 			return -myScroll.y;
 		});
 
 		// thanks to iScroll 5 we now have a real onScroll event (with some performance drawbacks)
 		myScroll.on("scroll", function () {
-			navController.update();
+			animationController.update();
 		});
 	}
 	
 	// change behaviour of controller to animate scroll instead of jump
-	navController.scrollTo(function (newpos) {
+	animationController.scrollTo(function (newpos) {
 		//TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
 		$('div').inview('scrollTo', newpos);
 	});
@@ -321,19 +279,21 @@ function scrollConfig() {
 		newPos = (id === '#header' ? 0 : newPos);
 		
 		// trigger scroll
-		navController.scrollTo(newPos);
+		animationController.scrollTo(newPos);
 
-			// if supported by the browser we can even update the URL.
+		// if supported by the browser we can even update the URL.
 		if (window.history && window.history.pushState) {
 			history.pushState("", document.title, id);
 		}
 	}
 
 	var startingHash = window.location.hash;
+	var splitHash = startingHash.split('/');
 
 	if (startingHash) {
-		toggleActiveNav(startingHash);
-		goToScene(startingHash)
+		var hashington = splitHash.length > 1 ? splitHash[0] : startingHash;
+		toggleActiveNav(hashington);
+		goToScene(hashington)
 	} else {
 		toggleActiveNav('#header');
 	}
