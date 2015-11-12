@@ -18,7 +18,8 @@
     "gsap": "greensock/GreenSock-JS",
     "scrollmagic": "~2.0.5",
     "queryloader2": "~3.0.15",
-    "iscroll": "~5.1.3"
+    "iscroll": "~5.1.3",
+    "hammerjs": "~2.0.4"
   },
   "overrides": {
     "gsap": {
