@@ -230,14 +230,16 @@ aside {
                 padding-bottom: 25.5px;
                 outline:none !important;
                 &:hover {
-                    background-color: #000 !important;
+                    /*background-color: #000 !important;*/
                     color: #fff !important;
+                    .linear-gradient-dark-bg();
                 }
             }
             &.active {
                 > a
                 > a:focus {
-                    background-color: #000 !important;
+                    /*background-color: #000 !important;*/
+                    .linear-gradient-dark-bg();
                     color: #fff !important;
                     &:hover {
                         color: #e8e8e8 !important;
@@ -250,7 +252,8 @@ aside {
     .nav {
         li {
             a.active {
-                background-color: #000 !important;
+                /*background-color: #000 !important;*/
+                .linear-gradient-dark-bg();
                 color: #fff !important;
                 &:hover {
                     color: #e8e8e8 !important;
@@ -456,6 +459,18 @@ aside {
 
 .sliderWrapper {
     padding: 100px 0;
+   /* position: relative;
+    width: 100%;
+
+    .slide {
+        position: relative;
+        width:100%;
+        float: left;
+
+        &.slide-2 {
+            left:70%;
+        }
+    }*/
 }
 
 #aspire {
@@ -483,17 +498,107 @@ aside {
             margin-top:50px;
             margin-left:10px;
         }
+    }
 
-        .sub-text {
-            margin-left: 20px;
-            margin-top: 40px;
+    .aspire-slide-2 {
+        .info {
+            text-align: center;
+            padding-left: 0;
+            left:50%;
 
-            p {
+            -webkit-transform: translateX(-50%);
+            -moz-transform:    translateX(-50%);
+            -ms-transform:     translateX(-50%);
+            -o-transform:      translateX(-50%);
+            transform:         translateX(-50%);
+
+            h1 {
+                border: 2px solid #fff;
+                padding: 20px;
                 margin:0;
-                padding: 0;
-                font-size: 18px;
-                margin-top: 10px;
-                margin-bottom: 10px;
+            }
+
+            h2 {
+                border: 2px solid #fff;
+                padding: 15px;
+            }
+            .sub-text {
+                margin-left: 0px;
+                margin-top: 20px;
+
+                p {
+                    margin:0;
+                    padding: 5px 10px;
+                    line-height: 1.2em;
+                    font-size: 22px;
+                    margin-top: 10px;
+                    margin-bottom: 10px;
+                    color: @dark-color;
+                    background-color: rgba(255,255,255,0.8)
+                }
+            }
+            @media only screen and (max-width: 1455px) {
+                width:80%;
+            }
+            @media only screen and (max-width: 1222px) {
+                width:90%;
+            }
+            @media only screen and (max-width: 1000px) {
+                h1 {
+                    font-size:50px;
+                }
+            }
+            @media only screen and (max-width: 850px) {
+                h1 {
+                    font-size:40px;
+                }
+                h2 {
+                    font-size: 26px;
+                }
+                p {
+                    font-size: 18px !important;
+                }
+
+            }
+            @media only screen and (max-width: 600px) {
+                h1 {
+                    font-size:40px !important;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+                h1 {
+                    font-size:30px !important;
+                }
+                h2 {
+                    font-size: 22px;
+                }
+                p {
+                    font-size: 15px !important;
+                }
+            }
+            @media only screen and (max-width: 450px) {
+                width: 100%;
+                h1 {
+                    padding: 20px 10px;
+                    font-size: 26px;
+                }
+                h2 {
+                    font-size: 20px;
+                }
+                p {
+                    font-size: 14px !important;
+                }
+            }
+            @media only screen and (max-width: 350px) {
+                h1 {
+                    font-size: 22px !important;
+                }
+                h2 {
+                    font-size: 16px;
+                }
+                p {
+                    font-size: 13px !important;
+                }
             }
         }
     }
@@ -523,6 +628,7 @@ aside {
             }
         }
     }
+
     @media only screen and (max-width: 600px) {
         .aspireCard {
             img {
@@ -656,14 +762,16 @@ aside {
             height: 100%;
 
             .box {
-                background-color: @dark-color;
-                color: #fff;
+                color: #ebe4d7;
                 padding: 15px;
                 margin:5px;
+
+                .linear-gradient-dark-bg();
 
                 h1 {
                     font-size: 22px;
                     margin:0 0 10px 0;
+                    text-transform: uppercase;
                 }
 
                 p {
@@ -672,13 +780,26 @@ aside {
                     margin:0;
                 }
             }
+            @media only screen and (max-width: 992px) {
+                .pull-left {
+                    margin-bottom:-5px;
+                }
+            }
         }/* methods-slide-2 */
     }/* sliderWrapper */
 
     @media only screen and (max-width: 900px) {
         .sliderWrapper .methods-slide-1{
             background-position-x: 10%;
+            background-position-y: 50%;
+            height:100%;
         } 
+    }
+
+    @media only screen and (max-width: 600px) {
+        .sliderWrapper .methods-slide-1 .text-left .section-heading {
+            font-size: 30px;
+        }
     }
 
     @media only screen and (max-width: 520px) {
@@ -697,11 +818,17 @@ aside {
             left: -10px;
         }
         .sliderWrapper .methods-slide-1{
-            background-position-x: 20% !important;
+            background-position-x: 8% !important;
             .text-left {
                 padding-left: 0px;
             }  
         } 
+    }
+
+    @media only screen and (max-width: 335px) {
+        .sliderWrapper .methods-slide-1 .text-left .section-heading {
+            font-size: 26px;
+        }
     }
 
     .nice-transition();
@@ -756,6 +883,9 @@ aside {
                 }
             }
         }
+    }
+
+    @media only screen and (max-width: 900px) {
     }
 
     @media only screen and (max-width: 650px) {
