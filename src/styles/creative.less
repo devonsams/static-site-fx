@@ -308,6 +308,8 @@ aside {
 
 // Sections
 
+
+
 #about, #aspire, #methods {
     background-size: cover;
     background-repeat: no-repeat;
@@ -462,12 +464,14 @@ aside {
     padding: 100px 0;
     position: relative;
     overflow: hidden;
+    overflow-x: hidden;
     width:100%;
     min-height: 100vh;
 
     .slide {
         position: absolute;
         float: left;
+        width:100%;
     }
 }
 
@@ -878,12 +882,19 @@ aside {
             transform: translateY(-50%);
         }
 
+        .agency-slide-1 {
+            padding-left: 0;
+            margin-left: -15px;
+        }
+
         .agency-slide-2 {
             position: absolute;
 
             .row {
                 margin-right:0;
+                margin-left: 0;
                 padding-right: 20px;
+                padding-left: 20px;
             }
 
             .text-center {
@@ -900,14 +911,12 @@ aside {
     }
 
     @media only screen and (max-width: 650px) {
-        padding: 100px 0px !important;
 
         .section-heading {
             font-size: 30px !important;
         }
     }
    @media only screen and (max-width: 490px) {
-        padding: 80px 0px !important;
 
         .section-heading {
             font-size: 24px !important;

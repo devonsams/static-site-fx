@@ -11,8 +11,53 @@ function scrollConfig() {
 		vph = $(window).height();
 		$("#loading").css({"min-height": vph + "px"});
 		$(".slide").css({"width": vpw + "px"});
+		$(".slide-1").css({"left": "0"});
 		$(".slide-2").css({"right": "-" + vpw + "px"});
 	}
+
+
+	$(".slide-right").on('click', function() {
+		var panelID = $(this).closest('section').attr('id');
+		var slide1 = "#" + panelID + ' .slide-1';
+		var slide2 = "#" + panelID + ' .slide-2';
+		var leftIndicator = "#" + panelID + ' .sliderCtrl .slide-left';
+		var rightIndicator = "#" + panelID + ' .sliderCtrl .slide-right';
+		vpw = $(window).width();
+
+		$(leftIndicator).removeClass('active');
+		$(rightIndicator).addClass('active');
+		
+		TweenMax.to(slide1, 0.8, {
+			left: "-" + vpw,
+			ease: Power4.easeOut
+		});
+		TweenMax.to(slide2, 0.8, {
+			right: 0,
+			ease: Power4.easeOut
+		});
+		resizeDiv();
+	});
+
+	$(".slide-left").on('click', function() {
+		var panelID = $(this).closest('section').attr('id');
+		var slide1 = "#" + panelID + ' .slide-1';
+		var slide2 = "#" + panelID + ' .slide-2';
+		var leftIndicator = "#" + panelID + ' .sliderCtrl .slide-left';
+		var rightIndicator = "#" + panelID + ' .sliderCtrl .slide-right';
+		vpw = $(window).width();
+
+		$(leftIndicator).addClass('active');
+		$(rightIndicator).removeClass('active');
+
+	    TweenMax.to(slide1, 0.8, {
+	      left: "0",
+	      ease: Power4.easeOut
+	    });
+	    TweenMax.to(slide2, 0.8, {
+	      right:"-" + vpw,
+	      ease: Power4.easeOut
+	    });
+	});
 	
 	$("body").queryLoader2({
 		

@@ -1,7 +1,7 @@
 $( document ).ready(function() {
 
 	scrollConfig();
-
+/*
 	var aspireLooper = $('#aspire').looper({
 		interval: false
 	}).data('looperjs');
@@ -67,6 +67,8 @@ $( document ).ready(function() {
 	$('#methods-read-more').on('click', methods2);
 	$('#methods-first').on('click', methods1);
 	$('#methods-second').on('click', methods2);
+
+	*/
 
 	$(window).bind('hashchange', function(e) { 
 		if (window.location.hash === '#aspire') {
