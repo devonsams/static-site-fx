@@ -68,7 +68,7 @@ $( document ).ready(function() {
 	$('#methods-first').on('click', methods1);
 	$('#methods-second').on('click', methods2);
 
-	*/
+	
 
 	$(window).bind('hashchange', function(e) { 
 		if (window.location.hash === '#aspire') {
@@ -94,5 +94,6 @@ $( document ).ready(function() {
 		    location.hash = hash || '';
 		}
 	}
+	*/
 	
 });

@@ -42,14 +42,24 @@ function scrollConfig() {
 			x: "-" + vpw,
 			ease: Power4.easeOut,
 			autoAlpha:0,
-			force3D: true
+			force3D: true,
+			onComplete: function () {
+		      	if (myScroll) {
+		      		myScroll.refresh();
+		      	}
+	      	}
 		});
 		TweenMax.to(slide2, 0.8, {
 			x: "-" + vpw,
 			height: "100%",
 			ease: Power4.easeOut,
 			autoAlpha: 1,
-			force3D: true
+			force3D: true,
+			onComplete: function () {
+		      	if (myScroll) {
+		      		myScroll.refresh();
+		      	}
+	      	}
 		});
 	});
 
@@ -74,14 +84,24 @@ function scrollConfig() {
 	      x: "+=" + vpw,
 	      ease: Power4.easeOut,
 	      autoAlpha: 1,
-	      force3D: true
+	      force3D: true,
+	      onComplete: function () {
+	      	if (myScroll) {
+	      		myScroll.refresh();
+	      	}
+	      }
 	    });
 	    TweenMax.to(slide2, 0.8, {
 	      x: "+=" + vpw,
 	      height:0,
 	      ease: Power4.easeOut,
 	      autoAlpha: 0,
-	      force3D: true
+	      force3D: true,
+	      onComplete: function () {
+	      	if (myScroll) {
+	      		myScroll.refresh();
+	      	}
+	      }
 	    });
 	});
 
