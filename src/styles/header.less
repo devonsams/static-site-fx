@@ -3,6 +3,7 @@ header {
     z-index: -99;
     position: relative;
     height: 100vh;
+    max-height: 1000px;
     width: 100%;
     min-height: auto;
     .background-cover;
@@ -10,6 +11,17 @@ header {
     background-image: url('/images/bg1.jpg');
     text-align: center;
     color: white;
+    
+    .container-fluid {
+        left:50% !important;
+
+        -webkit-transform: translateX(-50%);
+        -moz-transform:    translateX(-50%);
+        -ms-transform:     translateX(-50%);
+        -o-transform:      translateX(-50%);
+        transform:         translateX(-50%);
+    }
+    
     .header-content {
         position: relative;
         text-align: center;
