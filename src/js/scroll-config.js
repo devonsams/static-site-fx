@@ -165,13 +165,6 @@ function scrollConfig() {
 	
 	*/
 
-	watcher('#header');
-	watcher("#about");
-	watcher("#aspire");
-	watcher("#methods");
-	watcher("#agency");
-	watcher("#contact");
-
 	function watcher(selector) {
 		$(selector)
 			.inview({ offsetTop: 200, offsetBottom: -200 })
@@ -287,7 +280,7 @@ function scrollConfig() {
 			// requires inclusion of iscroll-probe.js
 			probeType: 3,
 			// pass through clicks inside scroll container
-			click: true 
+			click: true
 		});
 				
 		// overwrite scroll position calculation to use child's offset instead of container's scrollTop();
@@ -299,13 +292,26 @@ function scrollConfig() {
 		myScroll.on("scroll", function () {
 			animationController.update();
 		});
+
+		// change behaviour of controller to animate scroll instead of jump
+		animationController.scrollTo(function (newpos) {
+			//TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
+			myScroll.scrollTo(0, -(newpos));
+		});
+	} else {
+		watcher('#header');
+		watcher("#about");
+		watcher("#aspire");
+		watcher("#methods");
+		watcher("#agency");
+		watcher("#contact");
+
+		// change behaviour of controller to animate scroll instead of jump
+		animationController.scrollTo(function (newpos) {
+			//TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
+			$('div').inview('scrollTo', newpos);
+		});
 	}
-	
-	// change behaviour of controller to animate scroll instead of jump
-	animationController.scrollTo(function (newpos) {
-		//TweenMax.to('#signatureWrapper', 0.5, {scrollTo: {y: newpos}});
-		$('div').inview('scrollTo', newpos);
-	});
 	
 	//  bind scroll to anchor links
 	$(document).on("click", "a[href^='#']", function (e) {
