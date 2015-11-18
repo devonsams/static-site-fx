@@ -8,7 +8,7 @@
   var _direction;
   var _lastScrollTop = 0;
 
-  $container.on('scroll', scroll);
+  $window.on('scroll', scroll);
 
   function scroll(e) {
     if ( !_buffer && !_disabled ) {
@@ -53,7 +53,7 @@
 
   function checkInView( e ) {
     var tester = new Tester();
-    var vpTop = $container.scrollTop();
+    var vpTop = $window.scrollTop();
     var vpBottom = vpTop + $window.height();
     var bestMatch;
 
@@ -74,7 +74,7 @@
     }
 
     if (bestMatch) {
-      execScrolledin(bestMatch, e);    
+      execScrolledin(bestMatch, e);
     }
   }
 
@@ -86,8 +86,8 @@
   }
 
   function monitor( element, options ) {
-    var item = { 
-      element: element, 
+    var item = {
+      element: element,
       options: options
     };
     _watch.push(item);
@@ -115,7 +115,7 @@
   var methods = {
     scrollTo: function(newPos) {
       _disabled = true;
-      TweenMax.to($container, 0.5, {scrollTo: {y: newPos === 0 ? newPos : newPos - 50}, onComplete: function() {
+      TweenMax.to($window, 0.5, {scrollTo: {y: newPos === 0 ? newPos : newPos - 50}, onComplete: function() {
         //onComplete fires a little early, so adding a little buffer
         setTimeout(function() {
           _disabled = false;
