@@ -24,7 +24,9 @@ $( document ).ready(function() {
     $(".slide-2").css({"transform": "translate3d(" + vpw + "px, 0px, 0px)"});
   }
 
-  $(".slide-right").on('click', function() {
+  $(".slide-right").on('click', function(e) {
+    e.preventDefault();
+    if ($(this).hasClass('active')) return;
     var panelID = $(this).closest('section').attr('id');
     var slide1 = "#" + panelID + ' .slide-1';
     var slide2 = "#" + panelID + ' .slide-2';
@@ -65,7 +67,9 @@ $( document ).ready(function() {
     });
   });
 
-  $(".slide-left").on('click', function() {
+  $(".slide-left").on('click', function(e) {
+    e.preventDefault();
+    if ($(this).hasClass('active')) return;
     var panelID = $(this).closest('section').attr('id');
     var slide1 = "#" + panelID + ' .slide-1';
     var slide2 = "#" + panelID + ' .slide-2';
@@ -109,34 +113,44 @@ $( document ).ready(function() {
 
   $("#video-modal-open").on('click', function() {
     //$("#video-modal").addClass('show');
+    var frame = $('#video-modal').find('.embed-responsive-item');
+    var src = frame.attr('src');
+    frame.attr('src', src + '?autoplay=1');
+    setTimeout(function() {
+      TweenMax.fromTo("#video-modal", 0.4, {
+          y: "-150"
+        },
+        {
+          autoAlpha:1,
+          display: "block",
+          ease: Power4.easeOut,
+          force3D: true,
+          y: 0,
+        }
+      );
 
-    TweenMax.fromTo("#video-modal", 0.4, {
-        y: "-150"
-      },
-      {
-        autoAlpha:1,
-        display: "block",
-        ease: Power4.easeOut,
+      TweenMax.from("#video-modal .row", 0.6, {
+        autoAlpha: 0,
+        top: "60%",
+        ease: Power2.easeOut,
         force3D: true,
-        y: 0
-      }
-    );
-
-    TweenMax.from("#video-modal .row", 0.6, {
-      autoAlpha: 0,
-      top: "60%",
-      ease: Power2.easeOut,
-      force3D: true,
-      delay: 0.2
-    });
+        delay: 0.2,
+      });
+    }, 250);
   });
 
   $(".video-modal-close-trigger").on('click', function() {
+    var frame = $('#video-modal').find('.embed-responsive-item');
+    var src = frame.attr('src');
+
     TweenMax.to("#video-modal", 0.4, {
         autoAlpha: 0,
         display:"none",
         y: "-150",
         ease: Power4.easeOut,
+        onComplete: function() {
+          frame.attr('src', src.replace('?autoplay=1', ''));
+        }
       });
   });
 

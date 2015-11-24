@@ -7,50 +7,6 @@ function scrollConfig() {
   watcher("#agency");
   watcher("#contact");
 
-  function watcher(selector) {
-    $(selector)
-      .inview({ offsetTop: 200, offsetBottom: -200 })
-      .on('scrolledin', function () {
-        updateHash(selector);
-        toggleActiveNav(selector);
-      });
-  }
-
-  function updateHash(hash) {
-        if (history.pushState) {
-          if (hash) {
-          history.pushState(null, null, hash);
-        } else {
-          history.pushState("", document.title, window.location.pathname);
-        }
-    }
-    else {
-        location.hash = hash || '';
-    }
-  }
-
-  function toggleActiveNav(hash) {
-    hash = hash || '#page-top';
-    $('.page-scroll').removeClass('active');
-    $('.page-scroll[href="' + hash + '"]').addClass('active');
-  }
-
-  function createScene(options) {
-    options = options || {};
-    var scene = new ScrollMagic.Scene({
-      triggerElement: options.hash,
-      offset: options.offset || 0,
-      duration: options.duration || 0
-    });
-
-    if (options.progress) scene.on('progress', options.progress);
-    if (options.tween) scene.setTween(options.tween)
-
-    //scene.addIndicators();
-
-    return scene;
-  }
-
   var animationController = new ScrollMagic.Controller();
 
   var about_scene = createScene({
@@ -137,6 +93,61 @@ function scrollConfig() {
     }
   });
 
+  var startingHash = window.location.hash;
+  var splitHash = startingHash.split('/');
+
+  if (startingHash) {
+    var hashington = splitHash.length > 1 ? splitHash[0] : startingHash;
+    toggleActiveNav(hashington);
+    goToScene(hashington)
+  } else {
+    toggleActiveNav('#header');
+  }
+
+  function watcher(selector) {
+    $(selector)
+      .inview({ offsetTop: 200, offsetBottom: -200 })
+      .on('scrolledin', function () {
+        updateHash(selector);
+        toggleActiveNav(selector);
+      });
+  }
+
+  function updateHash(hash) {
+        if (history.pushState) {
+          if (hash) {
+          history.pushState(null, null, hash);
+        } else {
+          history.pushState("", document.title, window.location.pathname);
+        }
+    }
+    else {
+        location.hash = hash || '';
+    }
+  }
+
+  function toggleActiveNav(hash) {
+    hash = hash || '#page-top';
+    $('.page-scroll').removeClass('active');
+    $('.page-scroll[href="' + hash + '"]').addClass('active');
+  }
+
+  function createScene(options) {
+    options = options || {};
+    var scene = new ScrollMagic.Scene({
+      triggerElement: options.hash,
+      offset: options.offset || 0,
+      duration: options.duration || 0
+    });
+
+    if (options.progress) scene.on('progress', options.progress);
+    if (options.tween) scene.setTween(options.tween)
+
+    //scene.addIndicators();
+
+    return scene;
+  }
+
   function goToScene(id) {
     if (!id || !$(id).length) return;
 
@@ -150,16 +161,5 @@ function scrollConfig() {
     if (window.history && window.history.pushState) {
       history.pushState("", document.title, id);
     }
-  }
-
-  var startingHash = window.location.hash;
-  var splitHash = startingHash.split('/');
-
-  if (startingHash) {
-    var hashington = splitHash.length > 1 ? splitHash[0] : startingHash;
-    toggleActiveNav(hashington);
-    goToScene(hashington)
-  } else {
-    toggleActiveNav('#header');
   }
 }

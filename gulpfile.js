@@ -23,7 +23,37 @@ var awsCredentials = require('./aws-credentials.json');
 var modernizr = require('modernizr');
 var modernizrConfig = require('./modernizr-config.json');
 var streamFromPromise = require('stream-from-promise');
-var source = require('vinyl-source-stream')
+var source = require('vinyl-source-stream');
+var ejs = require('gulp-ejs');
+
+/*
+assets
+|=bower
+|-images
+|-fonts
+components
+|-scripts
+|--scripts.ejs
+|-styles
+|--styles.ejs
+|-header
+|--header.ejs
+|--header.js
+|--header.less
+js
+|-app.js
+layouts
+|-index.js
+pages
+|-WHAT FORMAT TO USE?
+styles
+favicon.ico
+robots.txt
+
+
+layouts
+
+*/
 
 function buildModernizr(config) {
   return new Promise(function(resolve, reject) {
@@ -139,10 +169,10 @@ gulp.task('build:root_files', function() {
 
 gulp.task('build:clean', function () {
   return del([
-    './dist/styles/app.min.css', 
-    './dist/styles/vendor.min.css', 
+    './dist/styles/app.min.css',
+    './dist/styles/vendor.min.css',
     './dist/js/app.min.js',
-    './dist/js/vendor.min.js', 
+    './dist/js/vendor.min.js',
   ]);
 });
 
@@ -179,7 +209,7 @@ gulp.task('inject:less', function() {
 
 gulp.task('compile:less', function () {
   return gulp.src('./src/styles/app.less')
-    .pipe(less({ paths: [      
+    .pipe(less({ paths: [
       path.join(__dirname, 'src/bower_components'),
       path.join(__dirname, 'src/styles'),
     ]}))
@@ -188,13 +218,11 @@ gulp.task('compile:less', function () {
 });
 
 gulp.task('compile:html', function() {
-  return gulp.src(['src/index.html'])
-    .pipe(fileinclude({
-      prefix: '@@',
-    }))
-    .pipe(gulp.dest('./.tmp/'));
+  gulp.src("src/index.ejs")
+    .pipe(ejs())
+    .pipe(gulp.dest("tmp"));
 });
- 
+
 gulp.task('serve:dev', function() {
   return gulp.src(['./.tmp', './src'])
     .pipe(webserver({
@@ -240,7 +268,7 @@ gulp.task('watch:js', function () {
     }
   });
 });
- 
+
 gulp.task('clean', function () {
   return del([
     './.tmp',
@@ -252,7 +280,7 @@ gulp.task('deploy', function() {
   var plain = gulp.src('dist/images/**/*', { base: 'dist' });
   var gzip = gulp.src(['dist/**/*', '!dist/images/**/*'])
     .pipe(awspublish.gzip());
-  
+
   var publisher = awspublish.create(awsCredentials);
 
   return merge(gzip, plain)
@@ -277,15 +305,15 @@ gulp.task('build', gulp.series(
     'compile',
     gulp.parallel(
       'build:fonts',
-      'build:videos', 
+      'build:videos',
       'build:bower_components',
       'build:root_files',
       gulp.series(
-        'build:base', 
-        'build:js', 
-        'build:images', 
-        'build:css', 
-        'build:html', 
+        'build:base',
+        'build:js',
+        'build:images',
+        'build:css',
+        'build:html',
         'build:clean'
       )
     )
@@ -296,7 +324,7 @@ gulp.task('default', gulp.series(
   'inject',
   'compile',
   gulp.parallel(
-    'serve:dev', 
+    'serve:dev',
     'watch'
   )
 ));
